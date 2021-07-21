@@ -1,8 +1,8 @@
 plugins {
-    id 'java'
+    id 'java-library'
 }
 
-group 'org.example'
+group 'cf.ystapi'
 version '1.0-SNAPSHOT'
 
 tasks.withType(JavaCompile) {
@@ -21,4 +21,5 @@ test {
     systemProperty "file.encoding", "utf-8"
     useJUnitPlatform()
 }
+
 compileJava.options.encoding = 'UTF-8'
