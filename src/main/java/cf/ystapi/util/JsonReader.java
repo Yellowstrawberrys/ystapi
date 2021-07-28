@@ -1,4 +1,4 @@
-package cf.ystapi.utill;
+package cf.ystapi.util;
 
 import org.json.JSONException;
 import org.json.JSONObject;

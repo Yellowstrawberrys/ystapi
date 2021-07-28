@@ -1,6 +1,6 @@
 package cf.ystapi.events;
 
-public interface Dateevent {
+public interface DateEvent {
     default void OnSecondChange() {}
     default void OnMinuteChange() {}
     default void OnHourChange() {}

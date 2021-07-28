@@ -1,4 +1,4 @@
-package cf.ystapi.utill;
+package cf.ystapi.util;
 
 public class arg {
     public static String[] spconvert(String toconvert){
