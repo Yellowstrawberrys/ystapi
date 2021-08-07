@@ -1,6 +1,5 @@
 package cf.ystapi.events;
 
-import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -14,14 +13,14 @@ import java.util.logging.Logger;
 *
 * */
 public class Manager {
-    static List<Dateevent> listeners = new ArrayList<Dateevent>();
+    static List<DateEvent> listeners = new ArrayList<DateEvent>();
     private boolean isthread = false;
     private static final Logger l = Logger.getLogger(Manager.class.getName());
 
     /*
     * Add Event Listener
     * */
-    public void addListener(Dateevent toAdd){
+    public void addListener(DateEvent toAdd){
         listeners.add(toAdd);
         if(!isthread) {
             isthread = true;
@@ -67,41 +66,41 @@ class th extends Thread{
                 }
                 //sec
                 if (s == 60) {
-                    for (Dateevent de : Manager.listeners)
+                    for (DateEvent de : Manager.listeners)
                         de.OnMinuteChange();
                     s = 0;
                     m++;
                 }
                 //min
                 if (m == 60) {
-                    for (Dateevent de : Manager.listeners)
+                    for (DateEvent de : Manager.listeners)
                         de.OnHourChange();
                     m = 0;
                     h++;
                 }
                 //hour
                 if (h == 24) {
-                    for (Dateevent de : Manager.listeners)
+                    for (DateEvent de : Manager.listeners)
                         de.OnDateChange();
                     h = 0;
                     d++;
                 }
                 //week
                 if (d == 7) {
-                    for (Dateevent de : Manager.listeners)
+                    for (DateEvent de : Manager.listeners)
                         de.OnWeekChange();
                     d = 0;
                     w++;
                 }
                 //day
                 if (w == (365/7)) {
-                    for (Dateevent de : Manager.listeners)
+                    for (DateEvent de : Manager.listeners)
                         de.OnYearChange();
                     w = 0;
                     y++;
                 }
                 s++;
-                for (Dateevent de : Manager.listeners)
+                for (DateEvent de : Manager.listeners)
                     de.OnSecondChange();
             }
         }catch (Exception e){
