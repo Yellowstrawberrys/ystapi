@@ -4,6 +4,8 @@ name: CI
 
 on:
   release:
+    branches:
+       - main
     types: [created]
 jobs:
   publish:
