@@ -11,7 +11,7 @@
   "createdBy": {
     "gradle": {
       "version": "6.8",
-      "buildId": "f3lvqo3llzbl5kj5ananx5rfc4"
+      "buildId": "gdxofkq6fjhk5ennn5bjmnec4e"
     }
   },
   "variants": [
@@ -28,11 +28,11 @@
         {
           "name": "YST-API-1.0-SNAPSHOT.jar",
           "url": "YST-API-1.0-SNAPSHOT.jar",
-          "size": 5074,
-          "sha512": "182a6a6315104e16d2809ade94c823edc57f4904d64e16433bc65777f8c2a2bc0a9fc38f147a338cd339de56d46eaab8cb9cfb57ca4cc524aebbce83c43c9a5f",
-          "sha256": "6ba17a6b2d8edadb7eefdd2306895ba31096dedc13a7ac4bbd475096f89e5663",
-          "sha1": "210e58b42e3596f4cfd094332717c963436cb28a",
-          "md5": "fd1533dd1b550daefd83fed12d603b7d"
+          "size": 10551,
+          "sha512": "c087980b7f115a37897e0b7473a0b0f126f37a03354e38091d12d6ac4bd255829583a408ed487b00c4ca8895b67c36cbd3523a59e05e90020440185bc7005ca3",
+          "sha256": "77494e73a7723595065853a3b9f1fce80803d29ec85a2e2754fc6ad4734332e9",
+          "sha1": "79876dd49ede660a653f2afe058b1faf05a2a9e0",
+          "md5": "de93fec705f12b16764bea924662f692"
         }
       ]
     },
@@ -52,17 +52,24 @@
           "version": {
             "requires": "20210307"
           }
+        },
+        {
+          "group": "net.dv8tion",
+          "module": "JDA",
+          "version": {
+            "requires": "4.3.0_277"
+          }
         }
       ],
       "files": [
         {
           "name": "YST-API-1.0-SNAPSHOT.jar",
           "url": "YST-API-1.0-SNAPSHOT.jar",
-          "size": 5074,
-          "sha512": "182a6a6315104e16d2809ade94c823edc57f4904d64e16433bc65777f8c2a2bc0a9fc38f147a338cd339de56d46eaab8cb9cfb57ca4cc524aebbce83c43c9a5f",
-          "sha256": "6ba17a6b2d8edadb7eefdd2306895ba31096dedc13a7ac4bbd475096f89e5663",
-          "sha1": "210e58b42e3596f4cfd094332717c963436cb28a",
-          "md5": "fd1533dd1b550daefd83fed12d603b7d"
+          "size": 10551,
+          "sha512": "c087980b7f115a37897e0b7473a0b0f126f37a03354e38091d12d6ac4bd255829583a408ed487b00c4ca8895b67c36cbd3523a59e05e90020440185bc7005ca3",
+          "sha256": "77494e73a7723595065853a3b9f1fce80803d29ec85a2e2754fc6ad4734332e9",
+          "sha1": "79876dd49ede660a653f2afe058b1faf05a2a9e0",
+          "md5": "de93fec705f12b16764bea924662f692"
         }
       ]
     }

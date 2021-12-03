@@ -17,5 +17,11 @@
       <version>20210307</version>
       <scope>runtime</scope>
     </dependency>
+    <dependency>
+      <groupId>net.dv8tion</groupId>
+      <artifactId>JDA</artifactId>
+      <version>4.3.0_277</version>
+      <scope>runtime</scope>
+    </dependency>
   </dependencies>
 </project>
