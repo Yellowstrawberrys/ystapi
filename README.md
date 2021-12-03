@@ -54,56 +54,70 @@ public class event implements DateEvent {
 
 ### **JDA - JDA에 대한 기능**
 
+<메인 클래스>
 <pre>
 <code>
 package cf.ystapi.explains.jda;
 
-import cf.ystapi.jda.Embed;
-import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import net.dv8tion.jda.api.interactions.components.Button;
-import org.jetbrains.annotations.NotNull;
+import cf.ystapi.explains.jda.CommandHandlers.first;
+import cf.ystapi.jda.DiscordBot;
+import cf.ystapi.jda.YSTBuilder;
+import net.dv8tion.jda.api.JDABuilder;
 
-public class embed extends ListenerAdapter {
-    @Override
-    public void onMessageReceived(@NotNull MessageReceivedEvent event) {
-        if(event.getMessage().getContentRaw().equals("!test")){
+import javax.security.auth.login.LoginException;
 
-            //Create Embed
-            EmbedBuilder e = new EmbedBuilder().setTitle("Test")
-                    .addField("TEST","TEST",false);
+public class bot {
+    public static DiscordBot discordBot;
+    public static void main(String[] args) throws LoginException {
+        JDABuilder jdaBuilder = JDABuilder.createDefault("ODMyMDA4MDkwMDQ3MjE3NzM1.YHdh6g.AThfgntFDjBKIanOhyBvjX45V98");
+        YSTBuilder builder = new YSTBuilder(jdaBuilder.build());
+        builder.addCommand(new first()).addCommand("run", (event, args1, channel) -> {
+            channel.sendMessage("Test Fin").queue();
+        })
+                .setPrefix("!").setOwner("719932404877230140");
 
-            //Get Text Channel
-            TextChannel t = event.getTextChannel();
-
-            //Create Buttons
-            Button b1 = Button.primary("Hi", "Click Me");
-            Button b2 = Button.primary("Hi1", "Click Me!");
-
-            //Send Message
-            event.getChannel().sendMessage(e.build()).queue(
-                    //AddButton
-                    message -> Embed.addButton(
-                        //Set Text
-                        t,
-                        //Set Message Id
-                        message.getId(),
-                        "Select:",
-                        //set Buttons
-                        b1,
-                        b2
-                    ));
-        }
+        discordBot = builder.build();
     }
 }
+
 </code>
 </pre>
-![](./jda_embed_addbuttons_1.png) 
+
+<first.java>
+<pre>
+<code>
+package cf.ystapi.explains.jda.CommandHandlers;
+
+import cf.ystapi.jda.CommandHandler;
+import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+
+public class first implements CommandHandler {
+    @Override
+    public String name() {
+        return "test";
+    }
+
+    @Override
+    public String helpMessages() {
+        return null;
+    }
+
+    @Override
+    public void onCalled(MessageReceivedEvent event, String[] args, MessageChannel channel) {
+        channel.sendMessage("Hello World!").queue();
+    }
+}
+
+</code>
+</pre>
+![](Screenshot 2021-12-03 200129.png)
+![](Screenshot 2021-12-03 200143.png)
+
+!ystdok
+![](Screenshot 2021-12-03 200219.png)
+![](Screenshot 2021-12-03 200304.png)
+![](Screenshot 2021-12-03 200332.png)
 
 ### **Util 기타 기능**
 <br/>
@@ -156,7 +170,7 @@ public class jsonreader_ex {
 
 ## 📋Used Apis(Libraries) / 이 API에서 쓴 라이브러리
 
-Json API(org.json)
+Json API(org.json)<br/>
 JDA(Java Discord Api) 
 
 ## 📝 Events in this Api / 여기에 있는 이벤트
