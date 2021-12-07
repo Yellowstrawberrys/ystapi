@@ -1,6 +1,5 @@
 package cf.ystapi.jda;
 
-import cf.ystapi.jda.JDAHandlers.EventHandler;
 import net.dv8tion.jda.api.JDA;
 
 import java.util.HashMap;

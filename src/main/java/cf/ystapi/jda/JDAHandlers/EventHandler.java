@@ -11,11 +11,18 @@ import org.jetbrains.annotations.NotNull;
 import java.io.*;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
-import java.nio.charset.StandardCharsets;
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.List;
 
+/**
+ * You don't need to come here!
+ * <p>
+ * If you want know about this then,
+ * <p>
+ * this class is Handling Message Event from jda
+ *
+ *
+ * @since Beta 0.0.0.3
+ * **/
 public class EventHandler extends ListenerAdapter {
     DiscordBot Discordbot;
     String prefix;
@@ -38,10 +45,8 @@ public class EventHandler extends ListenerAdapter {
             if(event.getAuthor().getId().equals(Discordbot.Owner)){
                 if(command.startsWith("ystdok")){
                     if(command.split(" ").length > 1){
-                        System.out.println(command.split(" ")[1]);
                         String input = command.replaceFirst(command.split(" ")[0], "").replaceFirst(command.split(" ")[1], "").replaceFirst("  ", "");
                         if(command.split(" ")[1].equals("sh")){
-                            System.out.println(input);
                             new Thread(() -> {
                                 long started = System.currentTimeMillis();
                                 try {

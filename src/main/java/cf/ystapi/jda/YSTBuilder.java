@@ -4,7 +4,17 @@ import cf.ystapi.jda.JDAHandlers.EventHandler;
 import net.dv8tion.jda.api.JDA;
 
 import java.util.HashMap;
-
+/**
+ * How to use:
+ *  <p>
+ *  YSTBuilder yst = new YSTBuilder(JDABuilder.build());
+ *  <p>
+ *  yst.setPrefix("!").setOwner("ID").addCommand(new bot());
+ *  <p>
+ *  DiscordBot dis = yst.build();
+ *
+ * @since Beta 0.0.0.3
+ * **/
 public class YSTBuilder {
     HashMap<String, CommandHandler> commands = new HashMap<>();
     HashMap<String, DiscordRunnable> RunnableCommands = new HashMap<>();
