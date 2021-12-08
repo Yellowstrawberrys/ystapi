@@ -22,17 +22,24 @@ publishing {
     repositories {
         maven {
             name = "github"
-            url = "https://maven.pkg.github.com/yellowstrawberrys/ystapi"
+            url = uri("https://maven.pkg.github.com/yellowstrawberrys/ystapi")
             credentials {
-                username = 'yellowstrawberrys'
-                password = System.getenv("GITTOKEN")
+                username = project.findProperty("gpr.user") ?: 'yellowstrawberrys'
+                password = project.findProperty("gpr.key") ?: System.getenv("GITTOKEN")
             }
         }
     }
     publications {
-        register("jar", MavenPublication) {
-            from(components["java"])
+        gpr(MavenPublication) {
+            from(components.java)
             pom {
+                name = "ystapi"
+                licenses {
+                    license {
+                        name = "The Apache License, Version 2.0"
+                        url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+                    }
+                }
                 url.set("https://github.com/yellowstrawberrys/ystapi.git")
             }
         }

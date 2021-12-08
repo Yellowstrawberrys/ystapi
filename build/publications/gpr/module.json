@@ -2,16 +2,15 @@
   "formatVersion": "1.1",
   "component": {
     "group": "cf.ystapi",
-    "module": "YST-API",
-    "version": "1.0-SNAPSHOT",
+    "module": "ystapi",
+    "version": "BETA-0.0.0.3",
     "attributes": {
-      "org.gradle.status": "integration"
+      "org.gradle.status": "release"
     }
   },
   "createdBy": {
     "gradle": {
-      "version": "6.8",
-      "buildId": "gdxofkq6fjhk5ennn5bjmnec4e"
+      "version": "7.3"
     }
   },
   "variants": [
@@ -20,19 +19,19 @@
       "attributes": {
         "org.gradle.category": "library",
         "org.gradle.dependency.bundling": "external",
-        "org.gradle.jvm.version": 8,
+        "org.gradle.jvm.version": 17,
         "org.gradle.libraryelements": "jar",
         "org.gradle.usage": "java-api"
       },
       "files": [
         {
-          "name": "YST-API-1.0-SNAPSHOT.jar",
-          "url": "YST-API-1.0-SNAPSHOT.jar",
-          "size": 10551,
-          "sha512": "c087980b7f115a37897e0b7473a0b0f126f37a03354e38091d12d6ac4bd255829583a408ed487b00c4ca8895b67c36cbd3523a59e05e90020440185bc7005ca3",
-          "sha256": "77494e73a7723595065853a3b9f1fce80803d29ec85a2e2754fc6ad4734332e9",
-          "sha1": "79876dd49ede660a653f2afe058b1faf05a2a9e0",
-          "md5": "de93fec705f12b16764bea924662f692"
+          "name": "ystapi-BETA-0.0.0.3.jar",
+          "url": "ystapi-BETA-0.0.0.3.jar",
+          "size": 17224,
+          "sha512": "ff72065a29a7d7637f0c2f5f1eb7059f1ab78fec4d6334309c7a5f8ca26bc672dc62eedaecf6e9cb30f5d95aac8d5874dae77e886529a08d06087c5af4696516",
+          "sha256": "8270f22d34b22ec08a398707951b1527412fd2709505047cb8925e7e20a95666",
+          "sha1": "846525296f0729ee1443b154de6f60c7e87dbf15",
+          "md5": "df34fecfa9f4499c6f0099869d4b3ac2"
         }
       ]
     },
@@ -41,7 +40,7 @@
       "attributes": {
         "org.gradle.category": "library",
         "org.gradle.dependency.bundling": "external",
-        "org.gradle.jvm.version": 8,
+        "org.gradle.jvm.version": 17,
         "org.gradle.libraryelements": "jar",
         "org.gradle.usage": "java-runtime"
       },
@@ -57,19 +56,19 @@
           "group": "net.dv8tion",
           "module": "JDA",
           "version": {
-            "requires": "4.3.0_277"
+            "requires": "5.0.0-alpha.1"
           }
         }
       ],
       "files": [
         {
-          "name": "YST-API-1.0-SNAPSHOT.jar",
-          "url": "YST-API-1.0-SNAPSHOT.jar",
-          "size": 10551,
-          "sha512": "c087980b7f115a37897e0b7473a0b0f126f37a03354e38091d12d6ac4bd255829583a408ed487b00c4ca8895b67c36cbd3523a59e05e90020440185bc7005ca3",
-          "sha256": "77494e73a7723595065853a3b9f1fce80803d29ec85a2e2754fc6ad4734332e9",
-          "sha1": "79876dd49ede660a653f2afe058b1faf05a2a9e0",
-          "md5": "de93fec705f12b16764bea924662f692"
+          "name": "ystapi-BETA-0.0.0.3.jar",
+          "url": "ystapi-BETA-0.0.0.3.jar",
+          "size": 17224,
+          "sha512": "ff72065a29a7d7637f0c2f5f1eb7059f1ab78fec4d6334309c7a5f8ca26bc672dc62eedaecf6e9cb30f5d95aac8d5874dae77e886529a08d06087c5af4696516",
+          "sha256": "8270f22d34b22ec08a398707951b1527412fd2709505047cb8925e7e20a95666",
+          "sha1": "846525296f0729ee1443b154de6f60c7e87dbf15",
+          "md5": "df34fecfa9f4499c6f0099869d4b3ac2"
         }
       ]
     }

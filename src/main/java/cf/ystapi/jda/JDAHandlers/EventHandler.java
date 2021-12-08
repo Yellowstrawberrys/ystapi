@@ -3,6 +3,11 @@ package cf.ystapi.jda.JDAHandlers;
 import cf.ystapi.jda.DiscordBot;
 import jdk.jshell.JShell;
 import jdk.jshell.SnippetEvent;
+import jdk.jshell.execution.DirectExecutionControl;
+import jdk.jshell.execution.LocalExecutionControlProvider;
+import jdk.jshell.spi.ExecutionControl;
+import jdk.jshell.spi.ExecutionControlProvider;
+import jdk.jshell.spi.ExecutionEnv;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -14,7 +19,7 @@ import java.lang.management.RuntimeMXBean;
 import java.util.List;
 
 /**
- * You don't need to come here!
+ * You don't need to come this class!
  * <p>
  * If you want know about this then,
  * <p>
@@ -23,17 +28,41 @@ import java.util.List;
  *
  * @since Beta 0.0.0.3
  * **/
+
 public class EventHandler extends ListenerAdapter {
     DiscordBot Discordbot;
     String prefix;
     JShell jShell;
+
+    /**
+     * You don't need to come here!
+     * <p>
+     * If you want know about this then,
+     * <p>
+     * this class is Handling Message Event from jda
+     *
+     * @version Beta 0.0.0.4
+     * @since Beta 0.0.0.3
+     * **/
     public EventHandler(DiscordBot Discordbot, String prefix){
         this.Discordbot = Discordbot;
         this.prefix = prefix;
         JShell.Builder jShellBuilder = JShell.builder();
+        jShellBuilder.executionEngine(new LocalExecutionControlProvider(), null);
         this.jShell = jShellBuilder.build();
     }
 
+
+    /**
+     * You don't need to come here!
+     * <p>
+     * If you want know about this then,
+     * <p>
+     * this code is handling message
+     *
+     *
+     * @since Beta 0.0.0.3
+     * **/
     @Override
     public void onMessageReceived(@NotNull MessageReceivedEvent event) {
         String command = event.getMessage().getContentRaw().replaceFirst(prefix, "");
