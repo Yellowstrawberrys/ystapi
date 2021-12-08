@@ -27,11 +27,11 @@
         {
           "name": "ystapi-BETA-0.0.0.3.jar",
           "url": "ystapi-BETA-0.0.0.3.jar",
-          "size": 17224,
-          "sha512": "ff72065a29a7d7637f0c2f5f1eb7059f1ab78fec4d6334309c7a5f8ca26bc672dc62eedaecf6e9cb30f5d95aac8d5874dae77e886529a08d06087c5af4696516",
-          "sha256": "8270f22d34b22ec08a398707951b1527412fd2709505047cb8925e7e20a95666",
-          "sha1": "846525296f0729ee1443b154de6f60c7e87dbf15",
-          "md5": "df34fecfa9f4499c6f0099869d4b3ac2"
+          "size": 18353,
+          "sha512": "fcb57b1ea0d42322527ba702a8bc16d2ead193766f38e4c5d854f63d25b38f69f5243b3984aa14610acbc201983d049b56cdd14885466c83202abc83c29b770c",
+          "sha256": "c9ea6206486f8f055e16058f6cbc0f487b0334312f92c5e90ff78583c442ae57",
+          "sha1": "f035e6da49f0a3619d6bf62cafa698c7b3b26feb",
+          "md5": "abcd1c2a8240e8af7ae8e398869af06a"
         }
       ]
     },
@@ -64,11 +64,11 @@
         {
           "name": "ystapi-BETA-0.0.0.3.jar",
           "url": "ystapi-BETA-0.0.0.3.jar",
-          "size": 17224,
-          "sha512": "ff72065a29a7d7637f0c2f5f1eb7059f1ab78fec4d6334309c7a5f8ca26bc672dc62eedaecf6e9cb30f5d95aac8d5874dae77e886529a08d06087c5af4696516",
-          "sha256": "8270f22d34b22ec08a398707951b1527412fd2709505047cb8925e7e20a95666",
-          "sha1": "846525296f0729ee1443b154de6f60c7e87dbf15",
-          "md5": "df34fecfa9f4499c6f0099869d4b3ac2"
+          "size": 18353,
+          "sha512": "fcb57b1ea0d42322527ba702a8bc16d2ead193766f38e4c5d854f63d25b38f69f5243b3984aa14610acbc201983d049b56cdd14885466c83202abc83c29b770c",
+          "sha256": "c9ea6206486f8f055e16058f6cbc0f487b0334312f92c5e90ff78583c442ae57",
+          "sha1": "f035e6da49f0a3619d6bf62cafa698c7b3b26feb",
+          "md5": "abcd1c2a8240e8af7ae8e398869af06a"
         }
       ]
     }
