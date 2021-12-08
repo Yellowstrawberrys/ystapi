@@ -10,7 +10,7 @@ import javax.security.auth.login.LoginException;
 public class bot {
     public static DiscordBot discordBot;
     public static void main(String[] args) throws LoginException {
-        JDABuilder jdaBuilder = JDABuilder.createDefault("ODMyMDA4MDkwMDQ3MjE3NzM1.YHdh6g.rzmz2qXmBNowOLl1FzGz7uulGgc");
+        JDABuilder jdaBuilder = JDABuilder.createDefault("Token");
         YSTBuilder builder = new YSTBuilder(jdaBuilder.build());
         builder.addCommand(new first()).addCommand("run", (event, args1, channel) -> {
             channel.sendMessage("Test Fin").queue();
