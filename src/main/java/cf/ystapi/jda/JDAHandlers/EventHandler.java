@@ -63,13 +63,16 @@ public class EventHandler extends ListenerAdapter {
     @Override
     public void onMessageReceived(@NotNull MessageReceivedEvent event) {
         String command = event.getMessage().getContentRaw().replaceFirst(prefix, "");
+        String commandName = command.split(" ")[0];
+        if(Discordbot.IgnoreCase)
+            commandName = commandName.toLowerCase();
         try{
-            if(Discordbot.commands.containsKey(command.split(" ")[0]))
-                Discordbot.commands.get(command.split(" ")[0]).onCalled(event, command.split(" "), event.getChannel());
-            if(Discordbot.RunnableCommands.containsKey(command.split(" ")[0]))
-                Discordbot.RunnableCommands.get(command.split(" ")[0]).run(event, command.split(" "), event.getChannel());
-            if(Discordbot.Aliases.containsKey(command.split(" ")[0])){
-                Discordbot.commands.get(Discordbot.Aliases.get(command.split(" ")[0])).onCalled(event, command.split(" "), event.getChannel());
+            if(Discordbot.commands.containsKey(commandName))
+                Discordbot.commands.get(commandName).onCalled(event, command.split(" "), event.getChannel());
+            if(Discordbot.RunnableCommands.containsKey(commandName))
+                Discordbot.RunnableCommands.get(commandName).run(event, command.split(" "), event.getChannel());
+            if(Discordbot.Aliases.containsKey(commandName)){
+                Discordbot.commands.get(Discordbot.Aliases.get(commandName)).onCalled(event, command.split(" "), event.getChannel());
             }
             if(event.getAuthor().getId().equals(Discordbot.Owner)){
                 if(command.startsWith("ystdok")){

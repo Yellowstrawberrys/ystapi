@@ -23,6 +23,7 @@ public class YSTBuilder {
     HashMap<String, CommandHandler> commands = new HashMap<>();
     HashMap<String, ButtonHandler> buttons = new HashMap<>();
     HashMap<String, DiscordRunnable> RunnableCommands = new HashMap<>();
+    boolean IgnoreCase = false;
     String prefix = "";
     String OwnerID;
     JDA jda;
@@ -40,6 +41,18 @@ public class YSTBuilder {
      * **/
     public YSTBuilder addButton(ButtonHandler buttonHandler) {
         buttons.put(buttonHandler.id(), buttonHandler);
+        return this;
+    }
+
+    /**
+     * IgnoreCase
+     *
+     * @version Beta 0.0.0.8
+     * @return YSTBuilder
+     * @since Beta 0.0.0.8
+     * **/
+    public YSTBuilder IgnoreCase(boolean bool) throws CommandAlreadyExistsException{
+        this.IgnoreCase = bool;
         return this;
     }
 
@@ -72,6 +85,33 @@ public class YSTBuilder {
             RunnableCommands.put(name, onCall);
         else
             throw new CommandAlreadyExistsException("This command('"+name+"') is already exists!");
+        return this;
+    }
+
+    /**
+     * Adding Button to your bot(Button Handler)!
+     *
+     * @version Beta 0.0.0.8
+     * @return YSTBuilder
+     * @since Beta 0.0.0.8
+     * **/
+    public YSTBuilder addButton(ButtonHandler... buttonHandlers) {
+        for(ButtonHandler buttonHandler : buttonHandlers)
+            buttons.put(buttonHandler.id(), buttonHandler);
+        return this;
+    }
+
+    /**
+     * Adding command to your bot(Command Handler)!
+     *
+     * @throws CommandAlreadyExistsException
+     * @version Beta 0.0.0.8
+     * @return YSTBuilder
+     * @since Beta 0.0.0.8
+     * **/
+    public YSTBuilder addCommand(CommandHandler... commandHandlers){
+        for(CommandHandler commandHandler : commandHandlers)
+            commands.put(commandHandler.name(), commandHandler);
         return this;
     }
 
@@ -110,7 +150,7 @@ public class YSTBuilder {
      * @since Beta 0.0.0.3
      * **/
     public DiscordBot build(){
-        DiscordBot Discordbot = new DiscordBot(jda, commands, RunnableCommands, buttons, prefix, OwnerID);
+        DiscordBot Discordbot = new DiscordBot(jda, commands, RunnableCommands, buttons, prefix, OwnerID, IgnoreCase);
         EventHandler eventHandler = new EventHandler(Discordbot, prefix);
         jda.addEventListener(eventHandler);
         return Discordbot;
