@@ -5,6 +5,9 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public interface CommandHandler {
     String name();
+    default String Aliases(){
+        return "";
+    }
     default boolean onlyGuild(){
         return true;
     }

@@ -3,7 +3,7 @@
   "component": {
     "group": "cf.ystapi",
     "module": "ystapi",
-    "version": "BETA-0.0.0.3",
+    "version": "BETA-0.0.0.4",
     "attributes": {
       "org.gradle.status": "release"
     }
@@ -25,13 +25,13 @@
       },
       "files": [
         {
-          "name": "ystapi-BETA-0.0.0.3.jar",
-          "url": "ystapi-BETA-0.0.0.3.jar",
+          "name": "ystapi-BETA-0.0.0.4.jar",
+          "url": "ystapi-BETA-0.0.0.4.jar",
           "size": 18353,
-          "sha512": "fcb57b1ea0d42322527ba702a8bc16d2ead193766f38e4c5d854f63d25b38f69f5243b3984aa14610acbc201983d049b56cdd14885466c83202abc83c29b770c",
-          "sha256": "c9ea6206486f8f055e16058f6cbc0f487b0334312f92c5e90ff78583c442ae57",
-          "sha1": "f035e6da49f0a3619d6bf62cafa698c7b3b26feb",
-          "md5": "abcd1c2a8240e8af7ae8e398869af06a"
+          "sha512": "6eef8d0c6874456be9ef1049c87a9be56fc0941cdfeea5323c0ce5685eb54757a32a127a2e2396e498d442207c7e17d5ac0b21f726f5bba9a4a5236692f9c7e5",
+          "sha256": "f7de738e7b141147d0b336064b6d0daaabef899297f77311373191e41af6774e",
+          "sha1": "e0a82ebab7ee3152fea2bcd4b87d3c7ef0542fd6",
+          "md5": "787df39e7c3933f6dd09f91fd97aabbf"
         }
       ]
     },
@@ -62,13 +62,13 @@
       ],
       "files": [
         {
-          "name": "ystapi-BETA-0.0.0.3.jar",
-          "url": "ystapi-BETA-0.0.0.3.jar",
+          "name": "ystapi-BETA-0.0.0.4.jar",
+          "url": "ystapi-BETA-0.0.0.4.jar",
           "size": 18353,
-          "sha512": "fcb57b1ea0d42322527ba702a8bc16d2ead193766f38e4c5d854f63d25b38f69f5243b3984aa14610acbc201983d049b56cdd14885466c83202abc83c29b770c",
-          "sha256": "c9ea6206486f8f055e16058f6cbc0f487b0334312f92c5e90ff78583c442ae57",
-          "sha1": "f035e6da49f0a3619d6bf62cafa698c7b3b26feb",
-          "md5": "abcd1c2a8240e8af7ae8e398869af06a"
+          "sha512": "6eef8d0c6874456be9ef1049c87a9be56fc0941cdfeea5323c0ce5685eb54757a32a127a2e2396e498d442207c7e17d5ac0b21f726f5bba9a4a5236692f9c7e5",
+          "sha256": "f7de738e7b141147d0b336064b6d0daaabef899297f77311373191e41af6774e",
+          "sha1": "e0a82ebab7ee3152fea2bcd4b87d3c7ef0542fd6",
+          "md5": "787df39e7c3933f6dd09f91fd97aabbf"
         }
       ]
     }

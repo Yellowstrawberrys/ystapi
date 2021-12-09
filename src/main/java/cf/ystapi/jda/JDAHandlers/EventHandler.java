@@ -9,6 +9,7 @@ import jdk.jshell.spi.ExecutionControl;
 import jdk.jshell.spi.ExecutionControlProvider;
 import jdk.jshell.spi.ExecutionEnv;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
@@ -60,7 +61,7 @@ public class EventHandler extends ListenerAdapter {
      * <p>
      * this code is handling message
      *
-     *
+     * @version Beta 0.0.0.5
      * @since Beta 0.0.0.3
      * **/
     @Override
@@ -71,6 +72,9 @@ public class EventHandler extends ListenerAdapter {
                 Discordbot.commands.get(command.split(" ")[0]).onCalled(event, command.split(" "), event.getChannel());
             if(Discordbot.RunnableCommands.containsKey(command.split(" ")[0]))
                 Discordbot.RunnableCommands.get(command.split(" ")[0]).run(event, command.split(" "), event.getChannel());
+            if(Discordbot.Aliases.containsKey(command.split(" ")[0])){
+                Discordbot.commands.get(Discordbot.Aliases.get(command.split(" ")[0])).onCalled(event, command.split(" "), event.getChannel());
+            }
             if(event.getAuthor().getId().equals(Discordbot.Owner)){
                 if(command.startsWith("ystdok")){
                     if(command.split(" ").length > 1){
@@ -127,5 +131,21 @@ public class EventHandler extends ListenerAdapter {
         }catch (NullPointerException e){
 
         }
+    }
+
+    /**
+     * You don't need to come here!
+     * <p>
+     * If you want know about this then,
+     * <p>
+     * this code is handling buttons
+     *
+     * @version Beta 0.0.0.5
+     * @since Beta 0.0.0.5
+     * **/
+    @Override
+    public void onButtonClick(@NotNull ButtonClickEvent event) {
+        if(Discordbot.Buttons.containsKey(event.getButton().getId()))
+            Discordbot.Buttons.get(event.getButton().getId()).onCalled(event, event.getUser(), event.getButton(), event.getChannel());
     }
 }

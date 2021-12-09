@@ -18,6 +18,7 @@ import java.util.HashMap;
  * **/
 public class YSTBuilder {
     HashMap<String, CommandHandler> commands = new HashMap<>();
+    HashMap<String, ButtonHandler> buttons = new HashMap<>();
     HashMap<String, DiscordRunnable> RunnableCommands = new HashMap<>();
     String prefix = "";
     String OwnerID;
@@ -25,6 +26,18 @@ public class YSTBuilder {
 
     public YSTBuilder(JDA JDAObject){
         jda = JDAObject;
+    }
+
+    /**
+     * Adding Button to your bot(Button Handler)!
+     *
+     * @version Beta 0.0.0.5
+     * @return YSTBuilder
+     * @since Beta 0.0.0.5
+     * **/
+    public YSTBuilder addButton(ButtonHandler buttonHandler) {
+        buttons.put(buttonHandler.id(), buttonHandler);
+        return this;
     }
 
     /**
@@ -94,7 +107,7 @@ public class YSTBuilder {
      * @since Beta 0.0.0.3
      * **/
     public DiscordBot build(){
-        DiscordBot Discordbot = new DiscordBot(jda, commands, RunnableCommands, prefix, OwnerID);
+        DiscordBot Discordbot = new DiscordBot(jda, commands, RunnableCommands, buttons, prefix, OwnerID);
         EventHandler eventHandler = new EventHandler(Discordbot, prefix);
         jda.addEventListener(eventHandler);
         return Discordbot;

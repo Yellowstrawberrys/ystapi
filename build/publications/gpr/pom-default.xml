@@ -9,7 +9,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>cf.ystapi</groupId>
   <artifactId>ystapi</artifactId>
-  <version>BETA-0.0.0.3</version>
+  <version>BETA-0.0.0.4</version>
   <name>ystapi</name>
   <url>https://github.com/yellowstrawberrys/ystapi.git</url>
   <licenses>
