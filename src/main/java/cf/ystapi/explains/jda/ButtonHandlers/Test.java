@@ -1,6 +1,6 @@
 package cf.ystapi.explains.jda.ButtonHandlers;
 
-import cf.ystapi.jda.ButtonHandler;
+import cf.ystapi.jda.Handlers.ButtonHandler;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;

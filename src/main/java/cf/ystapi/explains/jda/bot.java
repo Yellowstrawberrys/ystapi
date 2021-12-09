@@ -2,7 +2,7 @@ package cf.ystapi.explains.jda;
 
 import cf.ystapi.explains.jda.ButtonHandlers.Test;
 import cf.ystapi.explains.jda.CommandHandlers.first;
-import cf.ystapi.jda.DiscordBot;
+import cf.ystapi.jda.Objects.DiscordBot;
 import cf.ystapi.jda.YSTBuilder;
 import net.dv8tion.jda.api.JDABuilder;
 

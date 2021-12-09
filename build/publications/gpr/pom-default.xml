@@ -9,7 +9,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>cf.ystapi</groupId>
   <artifactId>ystapi</artifactId>
-  <version>BETA-0.0.0.4</version>
+  <version>BETA-0.0.0.6</version>
   <name>ystapi</name>
   <url>https://github.com/yellowstrawberrys/ystapi.git</url>
   <licenses>
@@ -28,7 +28,7 @@
     <dependency>
       <groupId>net.dv8tion</groupId>
       <artifactId>JDA</artifactId>
-      <version>5.0.0-alpha.1</version>
+      <version>5.0.0-alpha.2</version>
       <scope>runtime</scope>
     </dependency>
   </dependencies>

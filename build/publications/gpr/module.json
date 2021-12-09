@@ -3,7 +3,7 @@
   "component": {
     "group": "cf.ystapi",
     "module": "ystapi",
-    "version": "BETA-0.0.0.4",
+    "version": "BETA-0.0.0.6",
     "attributes": {
       "org.gradle.status": "release"
     }
@@ -25,13 +25,13 @@
       },
       "files": [
         {
-          "name": "ystapi-BETA-0.0.0.4.jar",
-          "url": "ystapi-BETA-0.0.0.4.jar",
-          "size": 18353,
-          "sha512": "6eef8d0c6874456be9ef1049c87a9be56fc0941cdfeea5323c0ce5685eb54757a32a127a2e2396e498d442207c7e17d5ac0b21f726f5bba9a4a5236692f9c7e5",
-          "sha256": "f7de738e7b141147d0b336064b6d0daaabef899297f77311373191e41af6774e",
-          "sha1": "e0a82ebab7ee3152fea2bcd4b87d3c7ef0542fd6",
-          "md5": "787df39e7c3933f6dd09f91fd97aabbf"
+          "name": "ystapi-BETA-0.0.0.6.jar",
+          "url": "ystapi-BETA-0.0.0.6.jar",
+          "size": 22150,
+          "sha512": "6917989de7cc9523595a66e529b1cab1fb9fe8c6db0d2ff1d2831149d018dff5fe1169a375b466c6d36fd4fc0cfaa295c4150c64c6f5dbc641c19171adfea5e1",
+          "sha256": "806dda60fa23949402a3baf3fb043e5e4fd8af906098bb9c012d88cadff1c24f",
+          "sha1": "8e8ceb6c496f228078f71cf21650a87ff5e5416c",
+          "md5": "e8adb52245313fe4e3c46293f510def3"
         }
       ]
     },
@@ -56,19 +56,19 @@
           "group": "net.dv8tion",
           "module": "JDA",
           "version": {
-            "requires": "5.0.0-alpha.1"
+            "requires": "5.0.0-alpha.2"
           }
         }
       ],
       "files": [
         {
-          "name": "ystapi-BETA-0.0.0.4.jar",
-          "url": "ystapi-BETA-0.0.0.4.jar",
-          "size": 18353,
-          "sha512": "6eef8d0c6874456be9ef1049c87a9be56fc0941cdfeea5323c0ce5685eb54757a32a127a2e2396e498d442207c7e17d5ac0b21f726f5bba9a4a5236692f9c7e5",
-          "sha256": "f7de738e7b141147d0b336064b6d0daaabef899297f77311373191e41af6774e",
-          "sha1": "e0a82ebab7ee3152fea2bcd4b87d3c7ef0542fd6",
-          "md5": "787df39e7c3933f6dd09f91fd97aabbf"
+          "name": "ystapi-BETA-0.0.0.6.jar",
+          "url": "ystapi-BETA-0.0.0.6.jar",
+          "size": 22150,
+          "sha512": "6917989de7cc9523595a66e529b1cab1fb9fe8c6db0d2ff1d2831149d018dff5fe1169a375b466c6d36fd4fc0cfaa295c4150c64c6f5dbc641c19171adfea5e1",
+          "sha256": "806dda60fa23949402a3baf3fb043e5e4fd8af906098bb9c012d88cadff1c24f",
+          "sha1": "8e8ceb6c496f228078f71cf21650a87ff5e5416c",
+          "md5": "e8adb52245313fe4e3c46293f510def3"
         }
       ]
     }

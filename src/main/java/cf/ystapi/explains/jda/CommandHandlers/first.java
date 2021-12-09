@@ -1,6 +1,6 @@
 package cf.ystapi.explains.jda.CommandHandlers;
 
-import cf.ystapi.jda.CommandHandler;
+import cf.ystapi.jda.Handlers.CommandHandler;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.interactions.components.ActionRow;

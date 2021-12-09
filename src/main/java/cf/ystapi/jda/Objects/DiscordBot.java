@@ -1,5 +1,9 @@
-package cf.ystapi.jda;
+package cf.ystapi.jda.Objects;
 
+import cf.ystapi.jda.DiscordRunnable;
+import cf.ystapi.jda.Handlers.ButtonHandler;
+import cf.ystapi.jda.Handlers.CommandHandler;
+import cf.ystapi.jda.YSTBuilder;
 import net.dv8tion.jda.api.JDA;
 
 import java.util.HashMap;
@@ -29,13 +33,18 @@ public class DiscordBot {
                 for(Object command : commands.keySet().toArray()){
                     if(commands.containsKey(command.toString())){
                         String a = commands.get(command.toString()).Aliases();
-                        if(a != null || !a.isBlank() || !a.isEmpty()){
+                        if(a != null && !a.isBlank() && !a.isEmpty()){
                             Aliases.put(a, command.toString());
                         }
                     }
                 }
             }
         }.start();
+    }
+
+    public DiscordBot addButton(ButtonHandler buttonHandler) {
+        Buttons.put(buttonHandler.id(), buttonHandler);
+        return this;
     }
 
     public DiscordBot addCommand(CommandHandler commandHandler){

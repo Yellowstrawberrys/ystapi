@@ -60,7 +60,7 @@ public class event implements DateEvent {
 package cf.ystapi.explains.jda;
 
 import cf.ystapi.explains.jda.CommandHandlers.first;
-import cf.ystapi.jda.DiscordBot;
+import cf.ystapi.jda.Objects.DiscordBot;
 import cf.ystapi.jda.YSTBuilder;
 import net.dv8tion.jda.api.JDABuilder;
 
@@ -88,7 +88,7 @@ public class bot {
 <code>
 package cf.ystapi.explains.jda.CommandHandlers;
 
-import cf.ystapi.jda.CommandHandler;
+import cf.ystapi.jda.Handlers.CommandHandler;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
