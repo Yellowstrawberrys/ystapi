@@ -32,9 +32,11 @@ public class DiscordBot {
             public void run() {
                 for(Object command : commands.keySet().toArray()){
                     if(commands.containsKey(command.toString())){
-                        String a = commands.get(command.toString()).Aliases();
-                        if(a != null && !a.isBlank() && !a.isEmpty()){
-                            Aliases.put(a, command.toString());
+                        String[] aliases = commands.get(command.toString()).Aliases();
+                        for(String a : aliases){
+                            if(a != null && !a.isBlank() && !a.isEmpty()){
+                                Aliases.put(a, command.toString());
+                            }
                         }
                     }
                 }
