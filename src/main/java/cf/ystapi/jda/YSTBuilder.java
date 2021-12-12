@@ -3,11 +3,17 @@ package cf.ystapi.jda;
 import cf.ystapi.jda.Exceptions.CommandAlreadyExistsException;
 import cf.ystapi.jda.Handlers.ButtonHandler;
 import cf.ystapi.jda.Handlers.CommandHandler;
+import cf.ystapi.jda.Handlers.DefaultHelpHandler;
+import cf.ystapi.jda.Handlers.HelpHandler;
 import cf.ystapi.jda.JDAHandlers.EventHandler;
 import cf.ystapi.jda.Objects.DiscordBot;
 import net.dv8tion.jda.api.JDA;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+
 /**
  * How to use:
  *  <p>
@@ -23,6 +29,8 @@ public class YSTBuilder {
     HashMap<String, CommandHandler> commands = new HashMap<>();
     HashMap<String, ButtonHandler> buttons = new HashMap<>();
     HashMap<String, DiscordRunnable> RunnableCommands = new HashMap<>();
+    List<String> helpCommands = new ArrayList<>();
+    HelpHandler helpHandler = new DefaultHelpHandler();
     boolean IgnoreCase = false;
     String prefix = "";
     String OwnerID;
@@ -144,13 +152,39 @@ public class YSTBuilder {
     }
 
     /**
+     * Setting Help Commands to your bot!
+     *
+     * @version Beta 0.0.0.9
+     * @return YSTBuilder
+     * @since Beta 0.0.0.9
+     * **/
+    public YSTBuilder setHelpCommands(String... commands){
+        helpCommands.clear();
+        helpCommands.addAll(Arrays.asList(commands));
+        return this;
+    }
+
+    /**
+     * Setting Help Command Handler to your bot!
+     *
+     * @version Beta 0.0.0.9
+     * @return DiscordBot
+     * @since Beta 0.0.0.9
+     * **/
+    public YSTBuilder setHelpHandler(HelpHandler helpHandler){
+        this.helpHandler = helpHandler;
+        return this;
+    }
+
+    /**
      * To start your bot, you need this!
      *
+     * @version Beta 0.0.0.9
      * @return DiscordBot
      * @since Beta 0.0.0.3
      * **/
     public DiscordBot build(){
-        DiscordBot Discordbot = new DiscordBot(jda, commands, RunnableCommands, buttons, prefix, OwnerID, IgnoreCase);
+        DiscordBot Discordbot = new DiscordBot(jda, commands, RunnableCommands, buttons, helpHandler, helpCommands, prefix, OwnerID, IgnoreCase);
         EventHandler eventHandler = new EventHandler(Discordbot, prefix);
         jda.addEventListener(eventHandler);
         return Discordbot;

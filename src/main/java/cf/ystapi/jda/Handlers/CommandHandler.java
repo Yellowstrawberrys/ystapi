@@ -11,6 +11,7 @@ public interface CommandHandler {
     default boolean onlyGuild(){
         return true;
     }
+    default String usage(){return "";};
     String helpMessages();
     void onCalled(MessageReceivedEvent event, String[] args, MessageChannel channel);
 }

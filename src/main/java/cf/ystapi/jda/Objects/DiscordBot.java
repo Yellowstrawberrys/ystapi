@@ -3,9 +3,11 @@ package cf.ystapi.jda.Objects;
 import cf.ystapi.jda.DiscordRunnable;
 import cf.ystapi.jda.Handlers.ButtonHandler;
 import cf.ystapi.jda.Handlers.CommandHandler;
+import cf.ystapi.jda.Handlers.HelpHandler;
 import net.dv8tion.jda.api.JDA;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class DiscordBot {
     public JDA jda;
@@ -15,11 +17,14 @@ public class DiscordBot {
     public HashMap<String, DiscordRunnable> RunnableCommands;
     public HashMap<String, ButtonHandler> Buttons;
 
+    public List<String> helpCommands;
+    public HelpHandler helpHandler;
+
     public String Owner;
     public boolean IgnoreCase;
     String prefix;
 
-    public DiscordBot(JDA jda, HashMap<String, CommandHandler> commands, HashMap<String, DiscordRunnable> RunnableCommands, HashMap<String, ButtonHandler> Buttons, String prefix, String OwnerID, boolean IgnoreCase){
+    public DiscordBot(JDA jda, HashMap<String, CommandHandler> commands, HashMap<String, DiscordRunnable> RunnableCommands, HashMap<String, ButtonHandler> Buttons, HelpHandler helpHandler, List<String> helpCommands, String prefix, String OwnerID, boolean IgnoreCase){
         this.jda = jda;
         this.commands = commands;
         this.RunnableCommands = RunnableCommands;
@@ -28,6 +33,8 @@ public class DiscordBot {
         this.Owner = OwnerID;
         this.Buttons = Buttons;
         this.IgnoreCase = IgnoreCase;
+        this.helpCommands = helpCommands;
+        this.helpHandler = helpHandler;
         Thread t = new Thread("LowerCase"){
             @Override
             public void run() {
@@ -106,6 +113,27 @@ public class DiscordBot {
 
     public DiscordBot addCommand(String name, DiscordRunnable onCall){
         RunnableCommands.put(name, onCall);
+        return this;
+    }
+
+    public DiscordBot replaceCommand(String name, DiscordRunnable onCall){
+        if(RunnableCommands.containsKey(name)){
+            RunnableCommands.replace(name, onCall);
+        }else if(commands.containsKey(name)){
+            commands.remove(name);
+            RunnableCommands.put(name, onCall);
+        }else
+            System.out.println("That command isn't exists!");
+        return this;
+    }
+
+    public DiscordBot removeCommand(String name){
+        if(RunnableCommands.containsKey(name))
+            RunnableCommands.remove(name);
+        else if(commands.containsKey(name))
+            commands.remove(name);
+        else
+            System.out.println("That command isn't exists!");
         return this;
     }
 

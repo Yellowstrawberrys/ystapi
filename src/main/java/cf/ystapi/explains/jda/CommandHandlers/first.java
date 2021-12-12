@@ -14,7 +14,12 @@ public class first implements CommandHandler {
 
     @Override
     public String helpMessages() {
-        return null;
+        return "This Command is Testing Command!";
+    }
+
+    @Override
+    public String usage() {
+        return "!test";
     }
 
     @Override

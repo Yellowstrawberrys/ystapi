@@ -14,7 +14,8 @@ public class bot {
         JDABuilder jdaBuilder = JDABuilder.createDefault("Token");
         YSTBuilder builder = new YSTBuilder(jdaBuilder.build());
         builder.addCommand(new first()).addCommand("run", (event, args1, channel) -> channel.sendMessage("Test Fin").queue())
-                .setPrefix("!").setOwner("719932404877230140");
+                .setPrefix("!").setOwner("719932404877230140").addCommand("audio", (event, args1, channel) -> event.getJDA().getDirectAudioController().connect(event.getMember().getVoiceState().getChannel()))
+                .setHelpCommands("d");
         builder.addButton(new Test());
 
         discordBot = builder.build();
