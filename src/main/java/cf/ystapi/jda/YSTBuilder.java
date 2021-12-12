@@ -185,7 +185,7 @@ public class YSTBuilder {
      * **/
     public DiscordBot build(){
         DiscordBot Discordbot = new DiscordBot(jda, commands, RunnableCommands, buttons, helpHandler, helpCommands, prefix, OwnerID, IgnoreCase);
-        EventHandler eventHandler = new EventHandler(Discordbot, prefix);
+        EventHandler eventHandler = new EventHandler(Discordbot);
         jda.addEventListener(eventHandler);
         return Discordbot;
     }

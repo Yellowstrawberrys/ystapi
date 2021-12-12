@@ -22,7 +22,7 @@ public class DiscordBot {
 
     public String Owner;
     public boolean IgnoreCase;
-    String prefix;
+    public String prefix;
 
     public DiscordBot(JDA jda, HashMap<String, CommandHandler> commands, HashMap<String, DiscordRunnable> RunnableCommands, HashMap<String, ButtonHandler> Buttons, HelpHandler helpHandler, List<String> helpCommands, String prefix, String OwnerID, boolean IgnoreCase){
         this.jda = jda;
