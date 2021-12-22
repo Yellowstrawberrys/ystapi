@@ -1,56 +1,46 @@
+<img src="./ystapilogo.png" alt="LOGO" width="200"/><br/>
 # YST API - 노랑딸기 API
 
 ## ❓How to use? / 어떻게 쓰나요?
 
-### **Event - 이벤트**<br/>
-
-#### Main:
-<pre>
-<code>
-package cf.ystapi.explains.event;
-
-import cf.ystapi.events.Manager;
-
-public class main {
-    public static void main(String[] args){
-        //AddListener for the api
-        Manager m = new Manager();
-        m.addListener(new event());
-    }
-}
-
-</code>
-</pre>
-
-#### Event:
+### **Logging - 로깅에 대한 기능**
 
 <pre>
 <code>
-package cf.ystapi.explains.event;
+package cf.ystapi.explains.Logging;
 
-import cf.ystapi.events.DateEvent;
+import cf.ystapi.Logging.*;
 
-public class event implements DateEvent {
-    int sec = 0;
-    int min = 0;
-    @Override
-    public void OnSecondChange() {
-        sec++;
-        if(sec == 60)
-            sec = 0;
-        System.out.println(sec);
-    }
+import java.io.IOException;
+import java.util.Random;
 
-    @Override
-    public void OnMinuteChange() {
-        min++;
-        System.out.println(min);
+public class Main {
+    static Logger logger;
+    public static void main(String[] args) throws IOException {
+        LoggingBuilder loggingBuilder = new LoggingBuilder();
+        loggingBuilder.setFormat("[%YY/%MM/%DD %HH:%mm:%SS | %LL] %MSG");
+        loggingBuilder.useWebLogger(true);
+        logger = loggingBuilder.build("wow");
+        logger.error("wow");
+        logger.warn("woow");
+        logger.info("wooow");
+        logger.debug("woooow");
+        System.out.println(1);
+        System.out.println();
+        new Thread(() -> {
+            while (true){
+                logger.log(String.valueOf(new Random().nextInt(2147892)), new Random().nextInt(4));
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 }
 </code>
 </pre>
-
-<br/>
 
 ### **JDA - JDA에 대한 기능**
 
@@ -167,6 +157,57 @@ public class jsonreader_ex {
 }
 </code>
 </pre>
+
+### **Event - 이벤트**<br/>
+
+#### Main:
+<pre>
+<code>
+package cf.ystapi.explains.event;
+
+import cf.ystapi.events.Manager;
+
+public class main {
+    public static void main(String[] args){
+        //AddListener for the api
+        Manager m = new Manager();
+        m.addListener(new event());
+    }
+}
+
+</code>
+</pre>
+
+#### Event:
+
+<pre>
+<code>
+package cf.ystapi.explains.event;
+
+import cf.ystapi.events.DateEvent;
+
+public class event implements DateEvent {
+    int sec = 0;
+    int min = 0;
+    @Override
+    public void OnSecondChange() {
+        sec++;
+        if(sec == 60)
+            sec = 0;
+        System.out.println(sec);
+    }
+
+    @Override
+    public void OnMinuteChange() {
+        min++;
+        System.out.println(min);
+    }
+}
+</code>
+</pre>
+
+<br/>
+
 
 ## 📋Used Apis(Libraries) / 이 API에서 쓴 라이브러리
 
