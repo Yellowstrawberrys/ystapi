@@ -50,7 +50,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
     implementation group: 'org.json', name: 'json', version: '20210307'
-    implementation("net.dv8tion:JDA:5.0.0-alpha.2")
+    implementation("net.dv8tion:JDA:5.0.0-alpha.4")
 }
 
 test {

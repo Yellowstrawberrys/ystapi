@@ -18,8 +18,8 @@ public class first implements CommandHandler {
     }
 
     @Override
-    public String usage() {
-        return "!test";
+    public String[] usage() {
+        return new String[]{"!test"};
     }
 
     @Override

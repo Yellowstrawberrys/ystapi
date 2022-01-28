@@ -1,20 +1,27 @@
 package cf.ystapi.jda.JDAHandlers;
 
 import cf.ystapi.jda.Objects.DiscordBot;
+import cf.ystapi.jda.System.ClassData;
+import cf.ystapi.jda.System.YSTClassLoader;
 import jdk.jshell.JShell;
 import jdk.jshell.SnippetEvent;
 import jdk.jshell.execution.LocalExecutionControlProvider;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.interactions.components.Button;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 /**
@@ -27,10 +34,10 @@ import java.util.List;
  *
  * @since Beta 0.0.0.3
  * **/
-
 public class EventHandler extends ListenerAdapter {
     DiscordBot Discordbot;
     JShell jShell;
+    YSTClassLoader classLoader = new YSTClassLoader();
     long ReadyTime;
 
     /**
@@ -62,30 +69,45 @@ public class EventHandler extends ListenerAdapter {
      * <p>
      * this code is handling message
      *
-     * @version Beta 0.0.1.0
+     * @version Beta 0.0.1.2
      * @since Beta 0.0.0.3
      * **/
     @Override
     public void onMessageReceived(@NotNull MessageReceivedEvent event) {
+
         if(event.getMessage().getContentRaw().startsWith(Discordbot.prefix)) {
             String command = event.getMessage().getContentRaw().replaceFirst(Discordbot.prefix, "");
             String commandName = command.split(" ")[0];
             if (Discordbot.IgnoreCase)
                 commandName = commandName.toLowerCase();
             try {
-                if (Discordbot.commands.containsKey(commandName))
-                    if (Discordbot.commands.get(commandName).onlyGuild())
+                if (Discordbot.commands.containsKey(commandName)) {
+                    Class cls = classLoader.loadClass(Discordbot.commands.get(command).getClass().getName());
+                    Object clazz = cls.newInstance();
+//                    if (Discordbot.commands.get(commandName).onlyGuild())
+//                        if (event.isFromGuild() || event.isFromThread())
+//                            Discordbot.commands.get(commandName).onCalled(event, command.split(" "), event.getChannel());
+//                        else
+//                            Discordbot.commands.get(commandName).onCalled(event, command.split(" "), event.getChannel());
+                    if (Discordbot.commands.get(commandName).onlyGuild()) {
                         if (event.isFromGuild() || event.isFromThread())
-                            Discordbot.commands.get(commandName).onCalled(event, command.split(" "), event.getChannel());
-                        else
-                            Discordbot.commands.get(commandName).onCalled(event, command.split(" "), event.getChannel());
+                            cls.getMethod("onCalled", MessageReceivedEvent.class, String[].class, MessageChannel.class).invoke(clazz, event, command.split(" "), event.getChannel());
+                    } else
+                        cls.getMethod("onCalled", MessageReceivedEvent.class, String[].class, MessageChannel.class).invoke(clazz, event, command.split(" "), event.getChannel());
+                }
                 if (Discordbot.RunnableCommands.containsKey(commandName))
                     Discordbot.RunnableCommands.get(commandName).run(event, command.split(" "), event.getChannel());
-                if (Discordbot.Aliases.containsKey(commandName))
-                    Discordbot.commands.get(Discordbot.Aliases.get(commandName)).onCalled(event, command.split(" "), event.getChannel());
+                if (Discordbot.Aliases.containsKey(commandName)) {
+                    Class cls = classLoader.loadClass(Discordbot.commands.get(Discordbot.Aliases.get(commandName)).getClass().getName());
+                    Object clazz = cls.newInstance();
+                    cls.getMethod("onCalled", MessageReceivedEvent.class, String[].class, MessageChannel.class).invoke(clazz, event, command.split(" "), event.getChannel());
+                }
                 if (Discordbot.helpCommands.contains(commandName) && command.split(" ").length > 0)
-                    if (Discordbot.commands.containsKey(command.split(" ")[1]))
-                        Discordbot.helpHandler.onCalled(command.split(" ")[1], Discordbot.commands.get(command.split(" ")[1]).helpMessages(), Discordbot.commands.get(command.split(" ")[1]).usage(), commandName, event.getChannel());
+                    if (Discordbot.commands.containsKey(command.split(" ")[1])) {
+                        Class cls = classLoader.loadClass(Discordbot.helpHandler.getClass().getName());
+                        Object clazz = cls.newInstance();
+                        cls.getMethod("onCalled", String[].class, String.class, String[].class, String.class, MessageChannel.class).invoke(clazz, command.split(" ")[1], Discordbot.commands.get(command.split(" ")[1]).helpMessages(), Discordbot.commands.get(command.split(" ")[1]).usage(), commandName, event.getChannel());
+                    }
                 if (event.getAuthor().getId().equals(Discordbot.Owner)) {
                     if (command.startsWith("ystdok")) {
                         if (command.split(" ").length > 1) {
@@ -105,11 +127,19 @@ public class EventHandler extends ListenerAdapter {
                                         while (reader.ready()) {
                                             st.append(reader.readLine()).append("\n");
                                         }
-                                        event.getChannel().sendMessageEmbeds(new EmbedBuilder().setTitle("YSTDOK")
-                                                .addField("Input", "`" + input + "`", false)
-                                                .addField("Output", "`" + st + "`", false)
-                                                .addField("Real Time", "`" + (System.currentTimeMillis() - started) + "ms`", false)
-                                                .setFooter("Requested type: sh").build()).queue();
+                                        if(st.length() > 1024){
+                                            event.getChannel().sendMessageEmbeds(new EmbedBuilder().setTitle("YSTDOK")
+                                                    .addField("Input", "`" + input + "`", false)
+                                                    .addField("Real Time", "`" + (System.currentTimeMillis() - started) + "ms`", false)
+                                                    .setFooter("Requested type: sh").build()).queue();
+                                            event.getChannel().sendMessage("**OUTPUT(Too many characters):**\n`"+st+"`").queue();
+                                        }else {
+                                            event.getChannel().sendMessageEmbeds(new EmbedBuilder().setTitle("YSTDOK")
+                                                    .addField("Input", "`" + input + "`", false)
+                                                    .addField("Output", "`" + st + "`", false)
+                                                    .addField("Real Time", "`" + (System.currentTimeMillis() - started) + "ms`", false)
+                                                    .setFooter("Requested type: sh").build()).queue();
+                                        }
                                     } catch (IOException | InterruptedException e) {
                                         e.printStackTrace();
                                     }
@@ -119,17 +149,45 @@ public class EventHandler extends ListenerAdapter {
                                     long started = System.currentTimeMillis();
                                     List<SnippetEvent> events = jShell.eval(input);
                                     SnippetEvent ev = events.get(events.size() - 1);
-                                    event.getChannel().sendMessageEmbeds(new EmbedBuilder().setTitle("YSTDOK")
-                                            .addField("Input", "`" + input + "`", false)
-                                            .addField("Output(JShell Output)", "`" + ((ev.value() == null || ev.value().isBlank()) ? "N/A" : ev.value()) + "`", false)
-                                            .addField("Real Time", "`" + (System.currentTimeMillis() - started) + "ms`", false)
-                                            .setFooter("Requested type: Java").build()).queue();
+                                    String st = ((ev.value() == null || ev.value().isBlank()) ? "N/A" : ev.value());
+                                    if(st.length() > 1024){
+                                        event.getChannel().sendMessageEmbeds(new EmbedBuilder().setTitle("YSTDOK")
+                                                .addField("Input", "`" + input + "`", false)
+                                                .addField("Real Time", "`" + (System.currentTimeMillis() - started) + "ms`", false)
+                                                .setFooter("Requested type: Java").build()).queue();
+                                        event.getChannel().sendMessage("**OUTPUT(Too many characters):**\n`"+st+"`").queue();
+                                    }else {
+                                        event.getChannel().sendMessageEmbeds(new EmbedBuilder().setTitle("YSTDOK")
+                                                .addField("Input", "`" + input + "`", false)
+                                                .addField("Output", "`" + st + "`", false)
+                                                .addField("Real Time", "`" + (System.currentTimeMillis() - started) + "ms`", false)
+                                                .setFooter("Requested type: Java").build()).queue();
+                                    }
                                 }).start();
+                            } else if (command.split(" ")[1].equals("replaceClass")){
+                                if(command.split(" ")[2] != null && !command.split(" ")[2].isEmpty() && !command.split(" ")[2].isBlank()){
+                                    new Thread(() -> {
+                                        if(!event.getMessage().getAttachments().isEmpty()){
+                                            Message.Attachment attachment = event.getMessage().getAttachments().get(0);
+                                            if(attachment.getFileExtension().equals("class")) {
+                                                String path = new File("./Ystdok/ReplacedClass/").getAbsolutePath();
+                                                if(!new File(path).exists())
+                                                    new File(path).mkdirs();
+                                                attachment.downloadToFile(path + "/" + attachment.getFileName())
+                                                        .thenAccept(file -> {
+                                                            ClassData.ReplacedClass.put(command.split(" ")[2], file.getAbsolutePath());
+                                                            event.getChannel().sendMessage("Replacing Class has been done, Class is saved in ./Ystdok/ReplacedClass/*.class;").queue();});
+                                            }else if(attachment.getFileExtension().equals("java")){
+                                                event.getChannel().sendMessage("We are not supporting direct-java-compile yet, please wait for new release!").queue();
+                                            }
+                                        }
+                                    }).start();
+                                }
                             }
                         } else {
                             RuntimeMXBean rb = ManagementFactory.getRuntimeMXBean();
                             Runtime.getRuntime().gc();
-                            event.getChannel().sendMessage("YST DOK Beta v0.1.3, JDA `5.0.0-alpha.1`, `Java " + System.getProperty("java.version") + "` on `" + System.getProperty("os.name") + "`\n" +
+                            event.getChannel().sendMessage("YST DOK Beta v0.1.4, JDA `"+net.dv8tion.jda.api.JDA.class.getPackage().getImplementationVersion()+"`, `Java " + System.getProperty("java.version") + "` on `" + System.getProperty("os.name") + "`\n" +
                                     "Process started at <t:" + ((System.currentTimeMillis() - rb.getUptime()) / 1000L) + ":R>, bot was ready at <t:" + (ReadyTime / 1000L) + ":R>.\n\n" +
                                     "Using " + String.format("%99.02f", ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1048576f)).replaceAll(" ", "") + "MB at this process.\n" +
                                     "Running on PID " + rb.getPid() + ".\n\n" +
@@ -140,14 +198,18 @@ public class EventHandler extends ListenerAdapter {
                         }
                     }
                 }
-            } catch (NullPointerException e) {
-
+            } catch (NullPointerException | ClassNotFoundException | NoSuchMethodException | InvocationTargetException | IllegalAccessException | InstantiationException e) {
+                System.out.println("API Error\n" +
+                        "- Please Report this in Github\n" +
+                        "\n" +
+                        "Message: "+e.getMessage()+"\n" +
+                        "Cause: "+e.getCause());
             }
         }
     }
 
     public static String voiceChannel(JDA jda){
-        return "> Bot has been connected to "+ jda.getAudioManagers().size()+" channel(s).\n";
+        return "> Bot has been connected to "+ jda.getAudioManagers().size()+" voice channel(s).\n";
     }
 
 //    public static long getUsingMemory(){
@@ -167,12 +229,17 @@ public class EventHandler extends ListenerAdapter {
      * <p>
      * this code is handling buttons
      *
-     * @version Beta 0.0.0.5
+     * @version Beta 0.0.1.2
      * @since Beta 0.0.0.5
      * **/
     @Override
     public void onButtonClick(@NotNull ButtonClickEvent event) {
-        if(Discordbot.Buttons.containsKey(event.getButton().getId()))
-            Discordbot.Buttons.get(event.getButton().getId()).onCalled(event, event.getUser(), event.getButton(), event.getChannel());
+        try {
+            if (Discordbot.Buttons.containsKey(event.getButton().getId())) {
+                Class cls = new YSTClassLoader().loadClass(Discordbot.Buttons.get(event.getButton().getId()).getClass().getName());
+                Object clazz = cls.newInstance();
+                cls.getMethod("onCalled", ButtonClickEvent.class, User.class, Button.class, MessageChannel.class).invoke(clazz, event, event.getUser(), event.getButton(), event.getChannel());
+            }
+        }catch (Exception e){}
     }
 }
