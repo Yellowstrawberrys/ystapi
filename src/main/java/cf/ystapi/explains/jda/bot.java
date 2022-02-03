@@ -11,10 +11,10 @@ import javax.security.auth.login.LoginException;
 public class bot {
     public static DiscordBot discordBot;
     public static void main(String[] args) throws LoginException {
-        JDABuilder jdaBuilder = JDABuilder.createDefault("ODMyMDA4MDkwMDQ3MjE3NzM1.YHdh6g.kFS3RWp8pZcGXgq7I3BfKSSiqjU");
+        JDABuilder jdaBuilder = JDABuilder.createDefault(args[0]);
         YSTBuilder builder = new YSTBuilder(jdaBuilder.build());
         builder.addCommand(new first()).addCommand("run", (event, args1, channel) -> channel.sendMessage("Test Fin").queue())
-                .setPrefix("\\$").setOwner("719932404877230140").addCommand("audio", (event, args1, channel) -> event.getJDA().getDirectAudioController().connect(event.getMember().getVoiceState().getChannel()))
+                .setPrefix("!").setOwner("719932404877230140").addCommand("audio", (event, args1, channel) -> event.getJDA().getDirectAudioController().connect(event.getMember().getVoiceState().getChannel()))
                 .setHelpCommands("d");
         builder.addButton(new Test());
 
