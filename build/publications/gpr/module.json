@@ -3,7 +3,7 @@
   "component": {
     "group": "cf.ystapi",
     "module": "ystapi",
-    "version": "BETA-0.0.0.9",
+    "version": "BETA-0.0.1.0",
     "attributes": {
       "org.gradle.status": "release"
     }
@@ -25,13 +25,13 @@
       },
       "files": [
         {
-          "name": "ystapi-BETA-0.0.0.9.jar",
-          "url": "ystapi-BETA-0.0.0.9.jar",
-          "size": 27467,
-          "sha512": "6d25c554ead606d2b645c6c2d316c5f19ea4bbfc8ad5c79eb697527aeb4f83529309e52135d8346f674b639dec0d9cc9331f70b5fb36c708104562feac9bb574",
-          "sha256": "4c248fd42a363c70744402bbe6c873d19f79a0036916557dd9d9db6e9431fd94",
-          "sha1": "f460270fa8424aebcf1c4f23d3391fde788c856e",
-          "md5": "3260a5b2fd3dc63ae642810c030b8539"
+          "name": "ystapi-BETA-0.0.1.0.jar",
+          "url": "ystapi-BETA-0.0.1.0.jar",
+          "size": 27485,
+          "sha512": "a00ecae961d73365c7e25ea2cfdea10e2419cd27b0550944ed518e9e03cada799b4fbacff271b36eef2fded308766118d797a6dbdfe13a5c635669ab8c18cb4a",
+          "sha256": "81c2e072a470247f550dbe4385875e28756608791c46e9884b049cb39d6c2ca7",
+          "sha1": "204e175846240391b105c5b411bf18fa463a58c3",
+          "md5": "3de60871d0c7084cb8ea1f02503b8143"
         }
       ]
     },
@@ -62,13 +62,13 @@
       ],
       "files": [
         {
-          "name": "ystapi-BETA-0.0.0.9.jar",
-          "url": "ystapi-BETA-0.0.0.9.jar",
-          "size": 27467,
-          "sha512": "6d25c554ead606d2b645c6c2d316c5f19ea4bbfc8ad5c79eb697527aeb4f83529309e52135d8346f674b639dec0d9cc9331f70b5fb36c708104562feac9bb574",
-          "sha256": "4c248fd42a363c70744402bbe6c873d19f79a0036916557dd9d9db6e9431fd94",
-          "sha1": "f460270fa8424aebcf1c4f23d3391fde788c856e",
-          "md5": "3260a5b2fd3dc63ae642810c030b8539"
+          "name": "ystapi-BETA-0.0.1.0.jar",
+          "url": "ystapi-BETA-0.0.1.0.jar",
+          "size": 27485,
+          "sha512": "a00ecae961d73365c7e25ea2cfdea10e2419cd27b0550944ed518e9e03cada799b4fbacff271b36eef2fded308766118d797a6dbdfe13a5c635669ab8c18cb4a",
+          "sha256": "81c2e072a470247f550dbe4385875e28756608791c46e9884b049cb39d6c2ca7",
+          "sha1": "204e175846240391b105c5b411bf18fa463a58c3",
+          "md5": "3de60871d0c7084cb8ea1f02503b8143"
         }
       ]
     }

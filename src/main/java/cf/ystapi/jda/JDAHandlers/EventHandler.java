@@ -67,7 +67,7 @@ public class EventHandler extends ListenerAdapter {
      * **/
     @Override
     public void onMessageReceived(@NotNull MessageReceivedEvent event) {
-        if(event.getMessage().getContentRaw().startsWith(Discordbot.prefix)) {
+        if(event.getMessage().getContentRaw().startsWith(Discordbot.prefix.replaceFirst("\\\\", ""))) {
             String command = event.getMessage().getContentRaw().replaceFirst(Discordbot.prefix, "");
             String commandName = command.split(" ")[0];
             if (Discordbot.IgnoreCase)
@@ -83,9 +83,11 @@ public class EventHandler extends ListenerAdapter {
                     Discordbot.RunnableCommands.get(commandName).run(event, command.split(" "), event.getChannel());
                 if (Discordbot.Aliases.containsKey(commandName))
                     Discordbot.commands.get(Discordbot.Aliases.get(commandName)).onCalled(event, command.split(" "), event.getChannel());
-                if (Discordbot.helpCommands.contains(commandName) && command.split(" ").length > 0)
-                    if (Discordbot.commands.containsKey(command.split(" ")[1]))
-                        Discordbot.helpHandler.onCalled(command.split(" ")[1], Discordbot.commands.get(command.split(" ")[1]).helpMessages(), Discordbot.commands.get(command.split(" ")[1]).usage(), commandName, event.getChannel());
+                try {
+                    if (Discordbot.helpCommands.contains(commandName) && command.split(" ").length > 0)
+                        if (Discordbot.commands.containsKey(command.split(" ")[1]))
+                            Discordbot.helpHandler.onCalled(command.split(" ")[1], Discordbot.commands.get(command.split(" ")[1]).helpMessages(), Discordbot.commands.get(command.split(" ")[1]).usage(), commandName, event.getChannel());
+                }catch (ArrayIndexOutOfBoundsException e){}
                 if (event.getAuthor().getId().equals(Discordbot.Owner)) {
                     if (command.startsWith("ystdok")) {
                         if (command.split(" ").length > 1) {
