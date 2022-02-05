@@ -13,6 +13,7 @@ public class ping {
      * @version Beta 0.0.1.2
      * @return long as MilliSecond
      * @since Beta 0.0.1.2
+     * @throws IOException
      * **/
     public static long Ping(String ip, int port) throws IOException {
         return ping(ip, port);
@@ -24,6 +25,7 @@ public class ping {
      * @version Beta 0.0.1.2
      * @return long as MilliSecond
      * @since Beta 0.0.1.2
+     * @throws IOException
      * **/
     public static long WebsitePing(String website) throws IOException {
         return ping(website.replaceAll("https://", "").replaceAll("http://", ""), 80);

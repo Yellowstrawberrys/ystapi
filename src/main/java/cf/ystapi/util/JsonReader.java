@@ -16,7 +16,11 @@ public class JsonReader {
         }
         return sb.toString();
     }
-
+    /**
+     * ReadFromUrl
+     * @throws IOException
+     * @throws JSONException
+     * **/
     public static JSONObject ReadFromUrl(String url) throws IOException, JSONException {
         InputStream is = new URL(url).openStream();
         try {
@@ -28,9 +32,17 @@ public class JsonReader {
             is.close();
         }
     }
+
+    /**
+     * ReadFrom String
+     * **/
     public static JSONObject ReadFromString(String toconvert){
         return new JSONObject(toconvert);
     }
+
+    /**
+     * ReadFrom Char
+     * **/
     public static JSONObject ReadFromChar(char toconvert){
         return new JSONObject(String.valueOf(toconvert));
     }

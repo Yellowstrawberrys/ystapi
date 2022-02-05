@@ -62,6 +62,9 @@ public class Logger {
         }));
     }
 
+    /**
+     * Send debug log
+     * **/
     public void debug(String message){
         message = formatter(message, format, "DEBUG");
         debug.add(Arrays.asList(message, "DEBUG"));
@@ -69,6 +72,9 @@ public class Logger {
         new printer().Update(message, 0);
     }
 
+    /**
+     * Send info log
+     * **/
     public void info(String message){
         message = formatter(message, format, "INFO");
         info.add(Arrays.asList(message, "INFO"));
@@ -76,6 +82,9 @@ public class Logger {
         new printer().Update(message, 1);
     }
 
+    /**
+     * Send warn log
+     * **/
     public void warn(String message){
         message = formatter(message, format, "WARN");
         warn.add(Arrays.asList(message, "WARN"));
@@ -83,6 +92,9 @@ public class Logger {
         new printer().Update(message, 2);
     }
 
+    /**
+     * Send error log
+     * **/
     public void error(String message){
         message = formatter(message, format, "ERROR");
         error.add(Arrays.asList(message, "ERROR"));
@@ -90,6 +102,9 @@ public class Logger {
         new printer().Update(message, 3);
     }
 
+    /**
+     * Send log
+     * **/
     public void log(String message, int level){
         String levelName = "";
         switch (level){
