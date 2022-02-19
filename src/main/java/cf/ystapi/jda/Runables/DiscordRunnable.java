@@ -1,4 +1,4 @@
-package cf.ystapi.jda;
+package cf.ystapi.jda.Runables;
 
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;

@@ -1,13 +1,13 @@
 package cf.ystapi.jda;
 
 import cf.ystapi.jda.Exceptions.CommandAlreadyExistsException;
-import cf.ystapi.jda.Handlers.ButtonHandler;
-import cf.ystapi.jda.Handlers.CommandHandler;
-import cf.ystapi.jda.Handlers.DefaultHelpHandler;
-import cf.ystapi.jda.Handlers.HelpHandler;
+import cf.ystapi.jda.Handlers.*;
 import cf.ystapi.jda.JDAHandlers.EventHandler;
 import cf.ystapi.jda.Objects.DiscordBot;
+import cf.ystapi.jda.Runables.DiscordRunnable;
+import cf.ystapi.jda.Runables.SlashRunnable;
 import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,16 +22,18 @@ import java.util.List;
  *  yst.setPrefix("!").setOwner("ID").addCommand(new bot());
  *  <p>
  *  DiscordBot dis = yst.build();
- *
  * @since Beta 0.0.0.3
  * **/
 public class YSTBuilder {
     HashMap<String, CommandHandler> commands = new HashMap<>();
     HashMap<String, ButtonHandler> buttons = new HashMap<>();
     HashMap<String, DiscordRunnable> RunnableCommands = new HashMap<>();
+    HashMap<String, SlashCommandHandler> slashCommands = new HashMap<>();
+    HashMap<String, SlashRunnable> slashRunnableCommands = new HashMap<>();
     List<String> helpCommands = new ArrayList<>();
     HelpHandler helpHandler = new DefaultHelpHandler();
     boolean IgnoreCase = false;
+    boolean SlashCommandMode = false;
     String prefix = "";
     String OwnerID;
     JDA jda;
@@ -49,6 +51,18 @@ public class YSTBuilder {
      * **/
     public YSTBuilder addButton(ButtonHandler buttonHandler) {
         buttons.put(buttonHandler.id(), buttonHandler);
+        return this;
+    }
+
+    /**
+     * If you turn on this, then YSTDOK and Help commands are only can call in slashCommand.
+     *
+     * @version Beta 0.0.1.4
+     * @return YSTBuilder
+     * @since Beta 0.0.1.4
+     * **/
+    public YSTBuilder SlashCommandMode(boolean isUsing){
+        SlashCommandMode = isUsing;
         return this;
     }
 
@@ -91,6 +105,38 @@ public class YSTBuilder {
     public YSTBuilder addCommand(String name, DiscordRunnable onCall) throws CommandAlreadyExistsException{
         if(!doesCommandExits(name))
             RunnableCommands.put(name, onCall);
+        else
+            throw new CommandAlreadyExistsException("This command('"+name+"') is already exists!");
+        return this;
+    }
+
+    /**
+     * Adding Slash command to your bot(SlashCommandHandler)!
+     *
+     * @throws CommandAlreadyExistsException
+     * @version Beta 0.0.1.4
+     * @return YSTBuilder
+     * @since Beta 0.0.1.4
+     * **/
+    public YSTBuilder addSlashCommand(SlashCommandHandler slashCommandHandler){
+        if(!doesCommandExits(slashCommandHandler.name()))
+            slashCommands.put(slashCommandHandler.name(), slashCommandHandler);
+        else
+            throw new CommandAlreadyExistsException("This command('"+slashCommandHandler.name()+"') is already exists!");
+        return this;
+    }
+
+    /**
+     * Adding Slash command to your bot(Slash Runnable)!
+     *
+     * @throws CommandAlreadyExistsException
+     * @version Beta 0.0.1.4
+     * @return YSTBuilder
+     * @since Beta 0.0.1.4
+     * **/
+    public YSTBuilder addSlashCommand(String name, SlashRunnable slashRunnable){
+        if(!doesCommandExits(name))
+            slashRunnableCommands.put(name, slashRunnable);
         else
             throw new CommandAlreadyExistsException("This command('"+name+"') is already exists!");
         return this;
@@ -179,14 +225,18 @@ public class YSTBuilder {
     /**
      * To start your bot, you need this!
      *
-     * @version Beta 0.0.0.9
+     * @version Beta 0.0.1.4
      * @return DiscordBot
      * @since Beta 0.0.0.3
      * **/
     public DiscordBot build(){
-        DiscordBot Discordbot = new DiscordBot(jda, commands, RunnableCommands, buttons, helpHandler, helpCommands, prefix, OwnerID, IgnoreCase);
+        DiscordBot Discordbot = new DiscordBot(jda, commands, RunnableCommands, buttons, slashCommands, slashRunnableCommands, helpHandler, helpCommands, prefix, OwnerID, IgnoreCase);
         EventHandler eventHandler = new EventHandler(Discordbot);
         jda.addEventListener(eventHandler);
+        for(SlashCommandHandler slashCommandHandler : slashCommands.values())
+            jda.upsertCommand(slashCommandHandler.name(), slashCommandHandler.description()).queue();
+        for(String command : slashRunnableCommands.keySet())
+            jda.upsertCommand(command, "N/A").queue();
         return Discordbot;
     }
 }

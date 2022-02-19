@@ -1,5 +1,7 @@
 package cf.ystapi.jda.JDAHandlers;
 
+import cf.ystapi.Logging.Logger;
+import cf.ystapi.Logging.LoggingBuilder;
 import cf.ystapi.jda.Objects.DiscordBot;
 import cf.ystapi.jda.System.ClassData;
 import cf.ystapi.jda.System.YSTClassLoader;
@@ -13,6 +15,7 @@ import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.Button;
@@ -78,11 +81,12 @@ public class EventHandler extends ListenerAdapter {
         if(event.getMessage().getContentRaw().startsWith(Discordbot.prefix)) {
             String command = event.getMessage().getContentRaw().replaceFirst(Discordbot.prefix, "");
             String commandName = command.split(" ")[0];
+            System.out.println(commandName);
             if (Discordbot.IgnoreCase)
                 commandName = commandName.toLowerCase();
             try {
                 if (Discordbot.commands.containsKey(commandName)) {
-                    Class cls = classLoader.loadClass(Discordbot.commands.get(command).getClass().getName());
+                    Class cls = classLoader.loadClass(Discordbot.commands.get(commandName).getClass().getName());
                     Object clazz = cls.newInstance();
 //                    if (Discordbot.commands.get(commandName).onlyGuild())
 //                        if (event.isFromGuild() || event.isFromThread())
@@ -199,11 +203,7 @@ public class EventHandler extends ListenerAdapter {
                     }
                 }
             } catch (NullPointerException | ClassNotFoundException | NoSuchMethodException | InvocationTargetException | IllegalAccessException | InstantiationException e) {
-                System.out.println("API Error\n" +
-                        "- Please Report this in Github\n" +
-                        "\n" +
-                        "Message: "+e.getMessage()+"\n" +
-                        "Cause: "+e.getCause());
+                err(e.getClass().getName(), e.getMessage());
             }
         }
     }
@@ -221,6 +221,65 @@ public class EventHandler extends ListenerAdapter {
 //        }
 //        return Runtime.getRuntime().totalMemory() + Metaspace + (Thread.getAllStackTraces())
 //    }
+
+
+    /**
+     * You don't need to come here!
+     * <p>
+     * If you want know about this then,
+     * <p>
+     * this code is handling slashCommands
+     * <p>
+     * <strong>Slash Command takes minimum 1min to register</strong>
+     *
+     * @version Beta 0.0.1.4
+     * @since Beta 0.0.1.4
+     * **/
+    @Override
+    public void onSlashCommand(@NotNull SlashCommandEvent event) {
+        String command = event.getName();
+        System.out.println(event.getSubcommandName());
+        if (Discordbot.IgnoreCase)
+            command = command.toLowerCase();
+        try {
+            if (Discordbot.slashCommands.containsKey(command)) {
+                Class cls = classLoader.loadClass(Discordbot.slashCommands.get(command).getClass().getName());
+                Object clazz = cls.newInstance();
+                cls.getMethod("onCalled", SlashCommandEvent.class, String.class, MessageChannel.class).invoke(clazz, event, event.getSubcommandName(), event.getChannel());
+            }
+            if (Discordbot.slashRunnableCommands.containsKey(command))
+                Discordbot.slashRunnableCommands.get(command).run(event, event.getSubcommandName(), event.getChannel());
+//            if (Discordbot.Aliases.containsKey(command)) {
+//                Class cls = classLoader.loadClass(Discordbot.slashCommands.get(Discordbot.Aliases.get(commandName)).getClass().getName());
+//                Object clazz = cls.newInstance();
+//                cls.getMethod("onCalled", SlashCommandEvent.class, String[].class, MessageChannel.class).invoke(clazz, event, command, event.getChannel());
+//            }
+            if (Discordbot.helpCommands.contains(command) && event.getSubcommandName() != null && Discordbot.isSlashMode)
+                if (Discordbot.slashCommands.containsKey(command)) {
+                    Class cls = classLoader.loadClass(Discordbot.helpHandler.getClass().getName());
+                    Object clazz = cls.newInstance();
+                    cls.getMethod("onCalled", String.class, String.class, String[].class, String.class, MessageChannel.class).invoke(clazz, Discordbot.slashCommands.get(command).name(), Discordbot.slashCommands.get(command).helpMessages(), Discordbot.slashCommands.get(command).usage(), command, event.getChannel());
+                }
+
+        }catch (Exception e){
+            err(e.getClass().getName(), e.getMessage());
+        }
+    }
+
+    private void err(String cause, String message){
+        if(Logger.getLoggerByName("System") == null) {
+            try {
+                new LoggingBuilder().build("System");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        Logger.getLoggerByName("System").error("YST API ERROR\n" +
+                " - Please report this error to Github\n" +
+                "\n" +
+                "Message: "+message+"\n" +
+                "Cause: "+cause);
+    }
 
     /**
      * You don't need to come here!

@@ -130,6 +130,15 @@ public class Logger {
         new printer().Update(message, level);
     }
 
+    /**
+     * Get logger by name of logger.
+     *
+     * @return Logger
+     * **/
+    public static Logger getLoggerByName(String name){
+        return Data.loggers.get(name);
+    }
+
     private String formatter(String message, String format, String level){
         String[] dates = new SimpleDateFormat("yyyy-yy-MM-dd-HH-mm-ss").format(new Date()).split("-");
         return format.replaceAll("%MSG", message).replaceAll("%LL", level).replaceAll("%CC", format.contains("%CC") ? new Exception().getStackTrace()[2].getClassName() : "")

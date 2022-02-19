@@ -18,13 +18,12 @@ public class SendLog implements HttpHandler {
             exchange.sendResponseHeaders(404, 0);
         else {
             StringBuilder logg = new StringBuilder();
-            for(Logger logger : Data.loggers)
-                if(logger.name.equals(log.toString()))
-                    for(List<String> logs : logger.WholeLog)
-                        logg.append("<text style=\"@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');font-family: 'Do Hyeon', sans-serif;color:")
-                                .append(logs.get(1).equals("DEBUG") ? "gray" : (logs.get(1).equals("INFO")
-                                        ? "white" : (logs.get(1).equals("WARN") ? "yellow" : "red")))
-                                .append("\">").append(logs.get(0)).append("</text>").append("<br/>");
+            Logger logger = Data.loggers.get(log);
+            for(List<String> logs : logger.WholeLog)
+                logg.append("<text style=\"@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');font-family: 'Do Hyeon', sans-serif;color:")
+                        .append(logs.get(1).equals("DEBUG") ? "gray" : (logs.get(1).equals("INFO")
+                                ? "white" : (logs.get(1).equals("WARN") ? "yellow" : "red")))
+                        .append("\">").append(logs.get(0)).append("</text>").append("<br/>");
             if(logg.isEmpty())
                 exchange.sendResponseHeaders(404, 0);
             else

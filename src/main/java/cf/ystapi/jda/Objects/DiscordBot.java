@@ -1,9 +1,11 @@
 package cf.ystapi.jda.Objects;
 
-import cf.ystapi.jda.DiscordRunnable;
+import cf.ystapi.jda.Handlers.SlashCommandHandler;
+import cf.ystapi.jda.Runables.DiscordRunnable;
 import cf.ystapi.jda.Handlers.ButtonHandler;
 import cf.ystapi.jda.Handlers.CommandHandler;
 import cf.ystapi.jda.Handlers.HelpHandler;
+import cf.ystapi.jda.Runables.SlashRunnable;
 import net.dv8tion.jda.api.JDA;
 
 import java.util.HashMap;
@@ -16,18 +18,24 @@ public class DiscordBot {
     public HashMap<String, String> Aliases;
     public HashMap<String, DiscordRunnable> RunnableCommands;
     public HashMap<String, ButtonHandler> Buttons;
+    public HashMap<String, SlashCommandHandler> slashCommands;
+    public HashMap<String, SlashRunnable> slashRunnableCommands;
 
     public List<String> helpCommands;
     public HelpHandler helpHandler;
 
     public String Owner;
-    public boolean IgnoreCase;
     public String prefix;
 
-    public DiscordBot(JDA jda, HashMap<String, CommandHandler> commands, HashMap<String, DiscordRunnable> RunnableCommands, HashMap<String, ButtonHandler> Buttons, HelpHandler helpHandler, List<String> helpCommands, String prefix, String OwnerID, boolean IgnoreCase){
+    public boolean IgnoreCase;
+    public boolean isSlashMode;
+
+    public DiscordBot(JDA jda, HashMap<String, CommandHandler> commands, HashMap<String, DiscordRunnable> RunnableCommands, HashMap<String, ButtonHandler> Buttons, HashMap<String, SlashCommandHandler> slashCommands, HashMap<String, SlashRunnable> slashRunnableCommands, HelpHandler helpHandler, List<String> helpCommands, String prefix, String OwnerID, boolean IgnoreCase){
         this.jda = jda;
         this.commands = commands;
         this.RunnableCommands = RunnableCommands;
+        this.slashCommands = slashCommands;
+        this.slashRunnableCommands = slashRunnableCommands;
         this.Aliases = new HashMap<>();
         this.prefix = prefix;
         this.Owner = OwnerID;

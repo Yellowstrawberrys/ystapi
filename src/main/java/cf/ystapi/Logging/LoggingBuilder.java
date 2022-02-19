@@ -15,7 +15,7 @@ public class LoggingBuilder {
         Logger logger = new Logger();
         logger.format = this.format;
         logger.name = name;
-        Data.loggers.add(logger);
+        Data.loggers.put(name, logger);
 
         if(isUsingWebLogger && Data.web == null) {
             Data.web = new Core();
