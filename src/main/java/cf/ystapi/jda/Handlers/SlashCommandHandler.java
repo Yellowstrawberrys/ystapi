@@ -1,7 +1,8 @@
 package cf.ystapi.jda.Handlers;
 
 import net.dv8tion.jda.api.entities.MessageChannel;
-import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+
 /**
  * Slash Command Handler
  * <p>
@@ -12,5 +13,5 @@ public interface SlashCommandHandler {
     default String[] usage(){return new String[]{};}
     String helpMessages();
     default String description(){return "";}
-    void onCalled(SlashCommandEvent event, String subCommand, MessageChannel channel);
+    void onCalled(SlashCommandInteractionEvent event, String subCommand, MessageChannel channel);
 }

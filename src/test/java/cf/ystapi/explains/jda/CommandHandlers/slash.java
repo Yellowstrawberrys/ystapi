@@ -2,7 +2,8 @@ package cf.ystapi.explains.jda.CommandHandlers;
 
 import cf.ystapi.jda.Handlers.SlashCommandHandler;
 import net.dv8tion.jda.api.entities.MessageChannel;
-import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+
 
 public class slash implements SlashCommandHandler {
     @Override
@@ -21,7 +22,7 @@ public class slash implements SlashCommandHandler {
     }
 
     @Override
-    public void onCalled(SlashCommandEvent event, String subCommand, MessageChannel channel) {
+    public void onCalled(SlashCommandInteractionEvent event, String subCommand, MessageChannel channel) {
         channel.sendMessage("Fuck").queue();
     }
 }

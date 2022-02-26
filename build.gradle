@@ -6,7 +6,7 @@ plugins {
 
 group 'cf.ystapi'
 archivesBaseName = 'ystapi'
-version 'BETA-0.0.1.4-PRE'
+version 'BETA-0.0.1.5'
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
@@ -113,7 +113,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
     implementation group: 'org.json', name: 'json', version: '20210307'
-    implementation("net.dv8tion:JDA:5.0.0-alpha.4")
+    implementation("net.dv8tion:JDA:5.0.0-alpha.6")
 }
 
 test {
