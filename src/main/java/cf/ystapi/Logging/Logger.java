@@ -9,6 +9,10 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <p>Logger</p>
+ * - YST LOGGER
+ * **/
 public class Logger {
     public String format = "%MM/%DD/%YYYY %HH:%mm | [%LL] %MSG";
     public String name = "";

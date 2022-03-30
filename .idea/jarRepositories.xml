@@ -41,5 +41,10 @@
       <option name="name" value="maven" />
       <option name="url" value="https://api.yellowstrawberry.cf/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven" />
+      <option name="name" value="maven" />
+      <option name="url" value="https://papermc.io/repo/repository/maven-public/" />
+    </remote-repository>
   </component>
 </project>

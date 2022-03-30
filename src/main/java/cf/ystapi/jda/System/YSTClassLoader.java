@@ -7,6 +7,10 @@ import java.io.InputStream;
 import static cf.ystapi.jda.System.ClassData.AddedClass;
 import static cf.ystapi.jda.System.ClassData.ReplacedClass;
 
+/**
+ * <p>YSTClassLoader</p>
+ * - Loads Class(es)
+ * **/
 public class YSTClassLoader extends ClassLoader {
 
     @Override

@@ -11,6 +11,11 @@ import net.dv8tion.jda.api.JDA;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * <p>DiscordBot Class</p>
+ * @since Beta 0.0.0.3
+ * @version Beta 0.0.1.6
+ * **/
 public class DiscordBot {
     public JDA jda;
 
@@ -97,33 +102,57 @@ public class DiscordBot {
         }.start();
     }
 
+    /**
+     * AddButton into the bot
+     * @return DiscordBot
+     * **/
     public DiscordBot addButton(ButtonHandler buttonHandler) {
         Buttons.put(buttonHandler.id(), buttonHandler);
         return this;
     }
 
+    /**
+     * Add Command into the bot
+     * @return DiscordBot
+     * **/
     public DiscordBot addCommand(CommandHandler commandHandler){
         commands.put(commandHandler.name(), commandHandler);
         return this;
     }
 
+    /**
+     * AddButton(s) into the bot
+     * @return DiscordBot
+     * **/
     public DiscordBot addButton(ButtonHandler... buttonHandlers) {
         for(ButtonHandler buttonHandler : buttonHandlers)
             Buttons.put(buttonHandler.id(), buttonHandler);
         return this;
     }
 
+    /**
+     * Add Command(s) into the bot
+     * @return DiscordBot
+     * **/
     public DiscordBot addCommand(CommandHandler... commandHandlers){
         for(CommandHandler commandHandler : commandHandlers)
             commands.put(commandHandler.name(), commandHandler);
         return this;
     }
 
+    /**
+     * Add Command with DiscordRunnable into the bot
+     * @return DiscordBot
+     * **/
     public DiscordBot addCommand(String name, DiscordRunnable onCall){
         RunnableCommands.put(name, onCall);
         return this;
     }
 
+    /**
+     * Replace Command into the bot
+     * @return DiscordBot
+     * **/
     public DiscordBot replaceCommand(String name, DiscordRunnable onCall){
         if(RunnableCommands.containsKey(name)){
             RunnableCommands.replace(name, onCall);
@@ -135,6 +164,10 @@ public class DiscordBot {
         return this;
     }
 
+    /**
+     * Remove Command into the bot
+     * @return DiscordBot
+     * **/
     public DiscordBot removeCommand(String name){
         if(RunnableCommands.containsKey(name))
             RunnableCommands.remove(name);
@@ -145,6 +178,10 @@ public class DiscordBot {
         return this;
     }
 
+    /**
+     * Setting prefix for the bot
+     * @return DiscordBot
+     * **/
     public DiscordBot setPrefix(String prefix){
         this.prefix = prefix;
         return this;

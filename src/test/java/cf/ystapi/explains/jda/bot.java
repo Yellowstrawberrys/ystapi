@@ -11,6 +11,8 @@ import javax.security.auth.login.LoginException;
 
 public class bot {
     public static DiscordBot discordBot;
+
+    @org.junit.jupiter.api.Test
     public static void main(String[] args) throws LoginException {
         JDABuilder jdaBuilder = JDABuilder.createDefault(args[0]);
         YSTBuilder builder = new YSTBuilder(jdaBuilder.build());

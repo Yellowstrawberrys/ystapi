@@ -11,7 +11,7 @@ public class LoggingBuilder {
     int webLoggerPort = 8080;
     String webLoggerPath = "/log";
 
-    public Logger build(String name) throws IOException {
+    public Logger build(String name) {
         Logger logger = new Logger();
         logger.format = this.format;
         logger.name = name;
@@ -19,7 +19,12 @@ public class LoggingBuilder {
 
         if(isUsingWebLogger && Data.web == null) {
             Data.web = new Core();
-            Data.web.start(8080, webLoggerPath);
+            try {
+                Data.web.start(8080, webLoggerPath);
+            } catch (IOException e) {
+                Logger.getLoggerByName("System").error("ERROR TO START WEB LOGGER");
+                e.printStackTrace();
+            }
         }
 
         return logger;
@@ -47,16 +52,25 @@ public class LoggingBuilder {
         return this;
     }
 
+    /**
+     * Setting WebLogger
+     * **/
     public LoggingBuilder useWebLogger(boolean isUsingWebLogger){
         this.isUsingWebLogger = isUsingWebLogger;
         return this;
     }
 
+    /**
+     * Setting WebPath(http://localhost:8080<strong>/log</strong>)
+     * **/
     public LoggingBuilder setWebLoggerPath(String Path){
         this.webLoggerPath = Path;
         return this;
     }
 
+    /**
+     * Setting WebPort(http://localhost:<strong>8080</strong>/log)
+     * **/
     public LoggingBuilder setWebLoggerPort(int Port){
         this.webLoggerPort = Port;
         return this;

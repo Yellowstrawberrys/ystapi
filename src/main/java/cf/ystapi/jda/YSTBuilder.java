@@ -7,7 +7,6 @@ import cf.ystapi.jda.Objects.DiscordBot;
 import cf.ystapi.jda.Runables.DiscordRunnable;
 import cf.ystapi.jda.Runables.SlashRunnable;
 import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 
 import java.util.ArrayList;
 import java.util.Arrays;
