@@ -141,11 +141,30 @@ public class DiscordBot {
     }
 
     /**
+     * Add Command(s) into the bot
+     * @return DiscordBot
+     * **/
+    public DiscordBot addCommand(SlashCommandHandler... commandHandlers){
+        for(SlashCommandHandler commandHandler : commandHandlers)
+            slashCommands.put(commandHandler.name(), commandHandler);
+        return this;
+    }
+
+    /**
      * Add Command with DiscordRunnable into the bot
      * @return DiscordBot
      * **/
     public DiscordBot addCommand(String name, DiscordRunnable onCall){
         RunnableCommands.put(name, onCall);
+        return this;
+    }
+
+    /**
+     * Add Command with DiscordRunnable into the bot
+     * @return DiscordBot
+     * **/
+    public DiscordBot addCommand(String name, SlashRunnable onCall){
+        slashRunnableCommands.put(name, onCall);
         return this;
     }
 

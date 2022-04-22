@@ -14,7 +14,7 @@ import java.util.List;
  * - YST LOGGER
  * **/
 public class Logger {
-    public String format = "%MM/%DD/%YYYY %HH:%mm | [%LL] %MSG";
+    public String format = "%MM%/%DD%/%YYYY% %HH%:%mm% | [%LL%] %MSG%";
     public String name = "";
     List<List<String>> debug = new ArrayList<>();
     List<List<String>> info = new ArrayList<>();
@@ -30,7 +30,7 @@ public class Logger {
             }
             public void println(Object s) {
                 WholeLog.add(Arrays.asList(formatter(s.toString(), format, "STD"), "INFO"));
-                super.println(formatter((String) s, format, "STD"));
+                super.println(formatter(s.toString(), format, "STD"));
             }
             public void println(int s) {
                 WholeLog.add(Arrays.asList(formatter(String.valueOf(s), format, "STD"), "INFO"));
@@ -70,68 +70,87 @@ public class Logger {
      * Send debug log
      * **/
     public void debug(String message){
-        message = formatter(message, format, "DEBUG");
-        debug.add(Arrays.asList(message, "DEBUG"));
-        WholeLog.add(Arrays.asList(message, "DEBUG"));
-        new printer().Update(message, 0);
+        for(String line : message.lines().toList()) {
+            line = formatter(line, format, "DEBUG");
+            debug.add(Arrays.asList(line, "DEBUG"));
+            WholeLog.add(Arrays.asList(line, "DEBUG"));
+            new printer().Update(line, 0);
+        }
     }
 
     /**
      * Send info log
      * **/
     public void info(String message){
-        message = formatter(message, format, "INFO");
-        info.add(Arrays.asList(message, "INFO"));
-        WholeLog.add(Arrays.asList(message, "INFO"));
-        new printer().Update(message, 1);
+        for(String line : message.lines().toList()) {
+            line = formatter(line, format, "INFO");
+            info.add(Arrays.asList(line, "INFO"));
+            WholeLog.add(Arrays.asList(line, "INFO"));
+            new printer().Update(line, 1);
+        }
     }
 
     /**
      * Send warn log
      * **/
     public void warn(String message){
-        message = formatter(message, format, "WARN");
-        warn.add(Arrays.asList(message, "WARN"));
-        WholeLog.add(Arrays.asList(message, "WARN"));
-        new printer().Update(message, 2);
+        for(String line : message.lines().toList()) {
+            line = formatter(line, format, "WARN");
+            warn.add(Arrays.asList(line, "WARN"));
+            WholeLog.add(Arrays.asList(line, "WARN"));
+            new printer().Update(line, 2);
+        }
     }
 
     /**
      * Send error log
      * **/
     public void error(String message){
-        message = formatter(message, format, "ERROR");
-        error.add(Arrays.asList(message, "ERROR"));
-        WholeLog.add(Arrays.asList(message, "ERROR"));
-        new printer().Update(message, 3);
+        for(String line : message.lines().toList()) {
+            line = formatter(line, format, "ERROR");
+            error.add(Arrays.asList(line, "ERROR"));
+            WholeLog.add(Arrays.asList(line, "ERROR"));
+            new printer().Update(line, 3);
+        }
     }
+
+    /**
+     * Send error log
+     * **/
+    public void err(String message){
+        error(message);
+    }
+
+
 
     /**
      * Send log
      * **/
     public void log(String message, int level){
-        String levelName = "";
-        switch (level){
-            case 0:
-                levelName = "DEBUG";
-                debug.add(Arrays.asList(message, levelName));
-                break;
-            case 1:
-                levelName = "INFO";
-                info.add(Arrays.asList(message, levelName));
-                break;
-            case 2:
-                levelName = "WARN";
-                warn.add(Arrays.asList(message, levelName));
-                break;
-            case 3:
-                levelName = "ERROR";
-                error.add(Arrays.asList(message, levelName));
-                break;
+        for(String line : message.lines().toList()) {
+            String levelName = "";
+            switch (level) {
+                case 0:
+                    levelName = "DEBUG";
+                    debug.add(Arrays.asList(line, levelName));
+                    break;
+                case 1:
+                    levelName = "INFO";
+                    info.add(Arrays.asList(line, levelName));
+                    break;
+                case 2:
+                    levelName = "WARN";
+                    warn.add(Arrays.asList(line, levelName));
+                    break;
+                case 3:
+                    levelName = "ERROR";
+                    error.add(Arrays.asList(line, levelName));
+                    break;
+            }
+            line = formatter(line, format, levelName);
+            WholeLog.add(Arrays.asList(line, levelName));
+            new printer().Update(line, level);
         }
-        message = formatter(message, format, levelName);
-        WholeLog.add(Arrays.asList(message, levelName));
-        new printer().Update(message, level);
     }
 
     /**
@@ -145,9 +164,9 @@ public class Logger {
 
     private String formatter(String message, String format, String level){
         String[] dates = new SimpleDateFormat("yyyy-yy-MM-dd-HH-mm-ss").format(new Date()).split("-");
-        return format.replaceAll("%MSG", message).replaceAll("%LL", level).replaceAll("%CC", format.contains("%CC") ? new Exception().getStackTrace()[2].getClassName() : "")
-                .replaceAll("%YYYY", dates[0]).replaceAll("%YY", dates[1]).replaceAll("%MM", dates[2])
-                .replaceAll("%DD", dates[3]).replaceAll("%HH", dates[4]).replaceAll("%mm", dates[5])
-                .replaceAll("%SS", dates[6]);
+        return format.replaceAll("%MSG%", message).replaceAll("%LL%", level).replaceAll("%CC%", format.contains("%CC%") ? new Exception().getStackTrace()[2].getClassName() : "")
+                .replaceAll("%YYYY%", dates[0]).replaceAll("%YY%", dates[1]).replaceAll("%MM%", dates[2])
+                .replaceAll("%DD%", dates[3]).replaceAll("%HH%", dates[4]).replaceAll("%mm%", dates[5])
+                .replaceAll("%SS%", dates[6]);
     }
 }

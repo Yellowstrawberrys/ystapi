@@ -1,5 +1,6 @@
 cf.ystapi.events
 cf.ystapi.jda
+cf.ystapi.jda.Enums
 cf.ystapi.jda.Exceptions
 cf.ystapi.jda.Handlers
 cf.ystapi.jda.JDAHandlers

@@ -25,6 +25,7 @@ public class first implements CommandHandler {
 
     @Override
     public void onCalled(MessageReceivedEvent event, String[] args, MessageChannel channel) {
+        System.out.println(args[2]);
         channel.sendMessage("Hello World!").setActionRows(ActionRow.of(Button.primary("one","WOW!"))).addFile(new Captcha().export(new Captcha().generateCaptchaText(5), 100, 100), "ystCaptcha.png").queue();
     }
 }

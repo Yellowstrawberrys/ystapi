@@ -1,5 +1,6 @@
 package cf.ystapi.jda.Handlers;
 
+import cf.ystapi.jda.Objects.CommandData;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 
@@ -21,6 +22,12 @@ public interface SlashCommandHandler {
      * Setting Help message of the command
      * **/
     String helpMessages();
+    /**
+     * Setting Options
+     * */
+    default CommandData commandData(){
+        return null;
+    }
     /**
      * Setting Description of the command
      * **/

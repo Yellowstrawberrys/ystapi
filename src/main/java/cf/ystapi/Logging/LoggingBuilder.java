@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class LoggingBuilder {
 
-    String format = "%MM/%DD/%YYYY %HH:%mm | [%LL] %MSG";
+    String format = "%MM%/%DD%/%YYYY% %HH%:%mm% | [%LL%] %MSG%";
     boolean isUsingWebLogger = false;
     int webLoggerPort = 8080;
     String webLoggerPath = "/log";
@@ -36,15 +36,15 @@ public class LoggingBuilder {
      * <br/>
      * Setting format<br/>
      * <br/>
-     * %YY = Year(2 Digits)<br/>
-     * %YYYY = Full Year<br/>
-     * %MM = Month <br/>
-     * %DD = Day<br/>
-     * %HH = Hour<br/>
-     * %mm = Min<br/>
-     * %LL = Level<br/>
-     * %CC = ClassName<br/>
-     * %MSG = Message(If you don't set this then, this will automatically add in format)<br/>
+     * %YY% = Year(2 Digits)<br/>
+     * %YYYY% = Full Year<br/>
+     * %MM% = Month <br/>
+     * %DD% = Day<br/>
+     * %HH% = Hour<br/>
+     * %mm% = Min<br/>
+     * %LL% = Level<br/>
+     * %CC% = ClassName<br/>
+     * %MSG% = Message(If you don't set this then, this will automatically add in format)<br/>
      * @return LoggingBuilder
      */
     public LoggingBuilder setFormat(String format){

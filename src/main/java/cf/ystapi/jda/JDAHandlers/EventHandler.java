@@ -25,6 +25,7 @@ import java.io.*;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -81,6 +82,7 @@ public class EventHandler extends ListenerAdapter {
 
         if(event.getMessage().getContentRaw().startsWith(Discordbot.prefix)) {
             String command = event.getMessage().getContentRaw().replaceFirst((Discordbot.prefix.equals("$") ? "\\$" : Discordbot.prefix), "");
+            System.out.println(command);
             String commandName = command.split(" ")[0];
             if (Discordbot.IgnoreCase)
                 commandName = commandName.toLowerCase();
@@ -285,18 +287,26 @@ public class EventHandler extends ListenerAdapter {
                 Object clazz = cls.getDeclaredConstructor().newInstance();
                 cls.getMethod("onCalled", SlashCommandInteractionEvent.class, String.class, MessageChannel.class).invoke(clazz, event, event.getSubcommandName(), event.getChannel());
             }catch (Exception e1){
-                err(e.getClass().getName(), e.getMessage());
+                String er = e.getCause().getClass().getName()+": "+e.getCause().getMessage()+"\n";
+                for(StackTraceElement l : e.getCause().getStackTrace())
+                    er+="   "+l.toString()+"\n";
+                Logger.getLoggerByName("System").err(er);
             }
         }catch (Exception e){
             err(e.getClass().getName(), e.getMessage());
         }
     }
 
+    /**
+     *
+     * @param cause
+     * @param message
+     */
     private void err(String cause, String message){
         if(Logger.getLoggerByName("System") == null) {
             new LoggingBuilder().build("System");
         }
-        Logger.getLoggerByName("System").error("YST API ERROR\n" +
+        Logger.getLoggerByName("System").err("YST API ERROR\n" +
                 " - Please report this error to Github\n" +
                 "\n" +
                 "Message: "+message+"\n" +
