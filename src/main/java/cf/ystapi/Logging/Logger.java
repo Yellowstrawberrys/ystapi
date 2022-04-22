@@ -62,7 +62,8 @@ public class Logger {
             }
         });
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            Data.web.server.stop(0);
+            if(Data.web.server != null)
+                Data.web.server.stop(0);
         }));
     }
 

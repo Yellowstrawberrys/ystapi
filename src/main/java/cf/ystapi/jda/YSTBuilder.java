@@ -104,11 +104,11 @@ public class YSTBuilder {
      * Adding command to your bot(SlashCommand Handler)!
      *
      * @throws CommandAlreadyExistsException
-     * @version Beta 0.0.1.8
+     * @version Beta 0.0.1.9
      * @return YSTBuilder
      * @since Beta 0.0.1.8
      * **/
-    public YSTBuilder addCommand(SlashCommandHandler commandHandler) throws CommandAlreadyExistsException{
+    public YSTBuilder addCommand(SlashCommandHandler... commandHandler) throws CommandAlreadyExistsException{
         addSlashCommand(commandHandler);
         return this;
     }
@@ -133,15 +133,17 @@ public class YSTBuilder {
      * Adding Slash command to your bot(SlashCommandHandler)!
      *
      * @throws CommandAlreadyExistsException
-     * @version Beta 0.0.1.4
+     * @version Beta 0.0.1.9
      * @return YSTBuilder
      * @since Beta 0.0.1.4
      * **/
-    public YSTBuilder addSlashCommand(SlashCommandHandler slashCommandHandler){
-        if(!doesCommandExits(slashCommandHandler.name()))
-            slashCommands.put(slashCommandHandler.name(), slashCommandHandler);
-        else
-            throw new CommandAlreadyExistsException("This command('"+slashCommandHandler.name()+"') is already exists!");
+    public YSTBuilder addSlashCommand(SlashCommandHandler... slashCommandHandlers){
+        for(SlashCommandHandler slashCommandHandler : slashCommandHandlers){
+            if(!doesCommandExits(slashCommandHandler.name()))
+                slashCommands.put(slashCommandHandler.name(), slashCommandHandler);
+            else
+                throw new CommandAlreadyExistsException("This command('"+slashCommandHandler.name()+"') is already exists!");
+        }
         return this;
     }
 
@@ -244,7 +246,7 @@ public class YSTBuilder {
     /**
      * To start your bot, you need this!
      *
-     * @version Beta 0.0.1.8
+     * @version Beta 0.0.1.9
      * @return DiscordBot
      * @since Beta 0.0.0.3
      * **/
@@ -255,20 +257,22 @@ public class YSTBuilder {
         DiscordBot Discordbot = new DiscordBot(jda, commands, RunnableCommands, buttons, slashCommands, slashRunnableCommands, helpHandler, helpCommands, prefix, OwnerID, IgnoreCase);
         EventHandler eventHandler = new EventHandler(Discordbot);
         jda.addEventListener(eventHandler);
-        for(SlashCommandHandler slashCommandHandler : slashCommands.values()){
-            SlashCommandData sl = Commands.slash(slashCommandHandler.name(), slashCommandHandler.description());
-            CommandData commandData = slashCommandHandler.commandData();
-            for(String st : commandData.getAsRaw().get("SubCommands"))
-                sl.addSubcommands(SubcommandData.fromData(DataObject.fromJson(st)));
-            for(String st : commandData.getAsRaw().get("SubCommandGroups"))
-                sl.addSubcommandGroups(SubcommandGroupData.fromData(DataObject.fromJson(st)));
-            for(String st : commandData.getAsRaw().get("Options"))
-                sl.addOptions(OptionData.fromData(DataObject.fromJson(st)));
-            jda.updateCommands().addCommands(sl).queue();
-        }
-        for(String command : slashRunnableCommands.keySet())
-            jda.upsertCommand(command, "N/A").queue();
-        Logger.getLoggerByName("System").info("Finish loading JDA Commands!");
+        new Thread(() -> {
+            for(SlashCommandHandler slashCommandHandler : slashCommands.values()){
+                SlashCommandData sl = Commands.slash(slashCommandHandler.name(), slashCommandHandler.description());
+                CommandData commandData = slashCommandHandler.commandData();
+                for(String st : commandData.getAsRaw().get("SubCommands"))
+                    sl.addSubcommands(SubcommandData.fromData(DataObject.fromJson(st)));
+                for(String st : commandData.getAsRaw().get("SubCommandGroups"))
+                    sl.addSubcommandGroups(SubcommandGroupData.fromData(DataObject.fromJson(st)));
+                for(String st : commandData.getAsRaw().get("Options"))
+                    sl.addOptions(OptionData.fromData(DataObject.fromJson(st)));
+                jda.updateCommands().addCommands(sl).queue();
+            }
+            for(String command : slashRunnableCommands.keySet())
+                jda.upsertCommand(command, "N/A").queue();
+            Logger.getLoggerByName("System").info("Finish loading JDA Commands!");
+        }).start();
         return Discordbot;
     }
 }
