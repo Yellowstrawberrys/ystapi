@@ -3,7 +3,7 @@
   "component": {
     "group": "cf.ystapi",
     "module": "ystapi",
-    "version": "BETA-0.0.1.8",
+    "version": "BETA-0.0.1.9",
     "attributes": {
       "org.gradle.status": "release"
     }
@@ -25,13 +25,13 @@
       },
       "files": [
         {
-          "name": "ystapi-BETA-0.0.1.8.jar",
-          "url": "ystapi-BETA-0.0.1.8.jar",
-          "size": 88412,
-          "sha512": "bb7f9f2b569bbbad0ecca359f8813eb600912816d87bec16a0611f1f30d658ff4583772e6de90c3663e1ae9c6227040e0988f37c00c24215de18e8160292a828",
-          "sha256": "93309b69a98179fe44a7fdc10207e276d698915fba0f670a598c7bfc028ab2bf",
-          "sha1": "428f66022daadcfc71f21ffe747859e48f0d0137",
-          "md5": "f49363eef37a520e2670075712c8a70d"
+          "name": "ystapi-BETA-0.0.1.9.jar",
+          "url": "ystapi-BETA-0.0.1.9.jar",
+          "size": 88678,
+          "sha512": "da3d708df492edd736a508ee4acc74258d9db17e5d3b2108522817e3a201c15a6833f3b71284be1851dc3fbf79614beb9be524e513f1c9a4b2e9f1450bc9da61",
+          "sha256": "76f1427b8b6a86554759bd376b801be6c6e0914a869eb5b874f50ce942a0e944",
+          "sha1": "bb1ff5dbd5a4ba05272b5c52a9661dbff64c1dfb",
+          "md5": "f8e0a8f404f3105a9b943b0b99a3c67e"
         }
       ]
     },
@@ -62,13 +62,13 @@
       ],
       "files": [
         {
-          "name": "ystapi-BETA-0.0.1.8.jar",
-          "url": "ystapi-BETA-0.0.1.8.jar",
-          "size": 88412,
-          "sha512": "bb7f9f2b569bbbad0ecca359f8813eb600912816d87bec16a0611f1f30d658ff4583772e6de90c3663e1ae9c6227040e0988f37c00c24215de18e8160292a828",
-          "sha256": "93309b69a98179fe44a7fdc10207e276d698915fba0f670a598c7bfc028ab2bf",
-          "sha1": "428f66022daadcfc71f21ffe747859e48f0d0137",
-          "md5": "f49363eef37a520e2670075712c8a70d"
+          "name": "ystapi-BETA-0.0.1.9.jar",
+          "url": "ystapi-BETA-0.0.1.9.jar",
+          "size": 88678,
+          "sha512": "da3d708df492edd736a508ee4acc74258d9db17e5d3b2108522817e3a201c15a6833f3b71284be1851dc3fbf79614beb9be524e513f1c9a4b2e9f1450bc9da61",
+          "sha256": "76f1427b8b6a86554759bd376b801be6c6e0914a869eb5b874f50ce942a0e944",
+          "sha1": "bb1ff5dbd5a4ba05272b5c52a9661dbff64c1dfb",
+          "md5": "f8e0a8f404f3105a9b943b0b99a3c67e"
         }
       ]
     },
@@ -82,13 +82,13 @@
       },
       "files": [
         {
-          "name": "ystapi-BETA-0.0.1.8-sources.jar",
-          "url": "ystapi-BETA-0.0.1.8-sources.jar",
-          "size": 64297,
-          "sha512": "eae6838fb261402b4b824e55a8f0c85b3ef8db3228ae259887be1b7baad3de1d69154cc5234e79fd83a6d1b17d334d8a014cec8e3e59b5ab98c5f031d1bfc3a3",
-          "sha256": "19ea25705704e1caca1968200cec9939d791a6e5d8765800e8fff215915f0eb7",
-          "sha1": "41de148867a635bc39794231cd15ff0859c4be01",
-          "md5": "feb714840d9e2e01684b62c99f7ccfc0"
+          "name": "ystapi-BETA-0.0.1.9-sources.jar",
+          "url": "ystapi-BETA-0.0.1.9-sources.jar",
+          "size": 64357,
+          "sha512": "b834f0547ad983f72732f8440170345f6675f5a7b30321f3d8834de44d0ea73a75f469bc2cc7b9cfc2660237f5513ec4a4f3ca8fe6e411aa381c3a51da4eec6c",
+          "sha256": "a6dc35dd043c611167e34c2c7faf9869c6bf6d2614a42ac948fe9973001766a9",
+          "sha1": "89c1322b345e5f93b3e9bed0441cbf114caaf215",
+          "md5": "cbd0c8a75cb3d08ed8cc5617e125d911"
         }
       ]
     },
@@ -102,13 +102,13 @@
       },
       "files": [
         {
-          "name": "ystapi-BETA-0.0.1.8-javadoc.jar",
-          "url": "ystapi-BETA-0.0.1.8-javadoc.jar",
-          "size": 244722,
-          "sha512": "f59cad6536b164690ec3a909c34df381d1f5c21937868a0c6398686bc58742ce02921c48e6c37ac9e189a086347d087a3c2084f4f75f0cd575856150be41daad",
-          "sha256": "c33971b31e8969d8508f80494eae089ce1a1743aa4644cd47f6ac4014303add3",
-          "sha1": "6493b66b3e622ce1299d88556cc4df424f80d925",
-          "md5": "c14709e0c47f38e89968805786b67a9a"
+          "name": "ystapi-BETA-0.0.1.9-javadoc.jar",
+          "url": "ystapi-BETA-0.0.1.9-javadoc.jar",
+          "size": 244736,
+          "sha512": "c21d79ea1a37a9fefab232d1b99efb6df979f6c3650a1c2fa8e294585ad6e5c2cd64ef44789b0c05c01874c09a11bb118ef28835f5a1eb22c0a25dea0b2126da",
+          "sha256": "819632384bfa8609bd6e9d55455bf9c95cc990a76380c8e511df56d5a56eea36",
+          "sha1": "39fb2747e0da6948d75770f743b7229b790eb912",
+          "md5": "82f39295c9f16a0942afc509b44f3588"
         }
       ]
     }

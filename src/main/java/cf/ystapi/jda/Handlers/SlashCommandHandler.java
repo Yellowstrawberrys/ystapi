@@ -15,23 +15,23 @@ public interface SlashCommandHandler {
      * **/
     String name();
     /**
+     * Setting Description of the command
+     * **/
+    String description();
+    /**
      * Setting Usage of the command
      * **/
     default String[] usage(){return new String[]{};}
     /**
      * Setting Help message of the command
      * **/
-    String helpMessages();
+    default String helpMessages(){return null;}
     /**
      * Setting Options
      * */
     default CommandData commandData(){
         return null;
     }
-    /**
-     * Setting Description of the command
-     * **/
-    default String description(){return "";}
     /**
      * Setting Action when command called.
      * **/

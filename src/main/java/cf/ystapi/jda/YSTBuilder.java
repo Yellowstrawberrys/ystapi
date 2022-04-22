@@ -259,14 +259,16 @@ public class YSTBuilder {
         jda.addEventListener(eventHandler);
         new Thread(() -> {
             for(SlashCommandHandler slashCommandHandler : slashCommands.values()){
-                SlashCommandData sl = Commands.slash(slashCommandHandler.name(), slashCommandHandler.description());
+                SlashCommandData sl = Commands.slash(slashCommandHandler.name(), (!(slashCommandHandler.description() == null && slashCommandHandler.description().isEmpty() && slashCommandHandler.description().isBlank()) ? slashCommandHandler.description() : "N/A"));
                 CommandData commandData = slashCommandHandler.commandData();
-                for(String st : commandData.getAsRaw().get("SubCommands"))
-                    sl.addSubcommands(SubcommandData.fromData(DataObject.fromJson(st)));
-                for(String st : commandData.getAsRaw().get("SubCommandGroups"))
-                    sl.addSubcommandGroups(SubcommandGroupData.fromData(DataObject.fromJson(st)));
-                for(String st : commandData.getAsRaw().get("Options"))
-                    sl.addOptions(OptionData.fromData(DataObject.fromJson(st)));
+                if(commandData != null) {
+                    for (String st : commandData.getAsRaw().get("SubCommands"))
+                        sl.addSubcommands(SubcommandData.fromData(DataObject.fromJson(st)));
+                    for (String st : commandData.getAsRaw().get("SubCommandGroups"))
+                        sl.addSubcommandGroups(SubcommandGroupData.fromData(DataObject.fromJson(st)));
+                    for (String st : commandData.getAsRaw().get("Options"))
+                        sl.addOptions(OptionData.fromData(DataObject.fromJson(st)));
+                }
                 jda.updateCommands().addCommands(sl).queue();
             }
             for(String command : slashRunnableCommands.keySet())
