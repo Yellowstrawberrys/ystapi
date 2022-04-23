@@ -6,7 +6,7 @@ plugins {
 
 group 'cf.ystapi'
 archivesBaseName = 'ystapi'
-version 'BETA-0.0.2.0'
+version 'BETA-0.0.2.2'
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'

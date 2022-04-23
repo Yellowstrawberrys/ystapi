@@ -40,7 +40,9 @@ public class YSTBuilder {
     HelpHandler helpHandler = new DefaultHelpHandler();
     boolean IgnoreCase = false;
     boolean SlashCommandMode = false;
+    boolean useFastSlashCommandUpsert = false;
     String prefix = "";
+    String testGuildId;
     String OwnerID;
     JDA jda;
 
@@ -235,7 +237,7 @@ public class YSTBuilder {
      * Setting Help Command Handler to your bot!
      *
      * @version Beta 0.0.0.9
-     * @return DiscordBot
+     * @return YSTBuilder
      * @since Beta 0.0.0.9
      * **/
     public YSTBuilder setHelpHandler(HelpHandler helpHandler){
@@ -244,9 +246,34 @@ public class YSTBuilder {
     }
 
     /**
+     * Set Test Guild for SlashCommands
+     *
+     * @param guildId
+     * @return YSTBuilder
+     * @since Beta 0.0.2.2
+     */
+    public YSTBuilder setTestGuild(String guildId){
+        this.testGuildId = guildId;
+        return this;
+    }
+
+    /**
+     * Set useFastSlashCommandUpsert<br/>
+     *<br/>
+     * <strong>I DON'T RECOMMEND TO USE THIS OPTION</strong><br/>
+     * <strong>This might cause more resources/loading in startup.</strong>
+     * @param isUsing
+     * @return YSTBuilder
+     */
+    public YSTBuilder useFastSlashCommandUpsert(boolean isUsing){
+        this.useFastSlashCommandUpsert = isUsing;
+        return this;
+    }
+
+    /**
      * To start your bot, you need this!
      *
-     * @version Beta 0.0.1.9
+     * @version Beta 0.0.2.2
      * @return DiscordBot
      * @since Beta 0.0.0.3
      * **/
@@ -258,23 +285,42 @@ public class YSTBuilder {
         EventHandler eventHandler = new EventHandler(Discordbot);
         jda.addEventListener(eventHandler);
         new Thread(() -> {
-            for(SlashCommandHandler slashCommandHandler : slashCommands.values()){
-                SlashCommandData sl = Commands.slash(slashCommandHandler.name(), (!(slashCommandHandler.description() == null && slashCommandHandler.description().isEmpty() && slashCommandHandler.description().isBlank()) ? slashCommandHandler.description() : "N/A"));
-                CommandData commandData = slashCommandHandler.commandData();
-                if(commandData != null) {
-                    for (String st : commandData.getAsRaw().get("SubCommands"))
-                        sl.addSubcommands(SubcommandData.fromData(DataObject.fromJson(st)));
-                    for (String st : commandData.getAsRaw().get("SubCommandGroups"))
-                        sl.addSubcommandGroups(SubcommandGroupData.fromData(DataObject.fromJson(st)));
-                    for (String st : commandData.getAsRaw().get("Options"))
-                        sl.addOptions(OptionData.fromData(DataObject.fromJson(st)));
+            try {
+                if (testGuildId != null && !(testGuildId.isBlank() && testGuildId.isEmpty())) {
+                    for (SlashCommandHandler slashCommandHandler : slashCommands.values())
+                        jda.awaitReady().getGuildById(testGuildId).upsertCommand(slashCommandDataMaker(slashCommandHandler)).queue();
                 }
-                jda.updateCommands().addCommands(sl).queue();
-            }
-            for(String command : slashRunnableCommands.keySet())
-                jda.upsertCommand(command, "N/A").queue();
-            Logger.getLoggerByName("System").info("Finish loading JDA Commands!");
+                if (useFastSlashCommandUpsert) {
+                    for (Guild g : jda.awaitReady().getGuilds()) {
+                        for (SlashCommandHandler slashCommandHandler : slashCommands.values()) {
+                            g.upsertCommand(slashCommandDataMaker(slashCommandHandler)).queue();
+                        }
+                    }
+                } else {
+                    List<SlashCommandData> list = new ArrayList<>();
+                    for (SlashCommandHandler slashCommandHandler : slashCommands.values())
+                        list.add(slashCommandDataMaker(slashCommandHandler));
+                    jda.awaitReady().updateCommands().addCommands(list).queue();
+                }
+                for (String command : slashRunnableCommands.keySet())
+                    jda.awaitReady().upsertCommand(command, "N/A").queue();
+                Logger.getLoggerByName("System").info("Finish loading JDA Commands!");
+            }catch (Exception e){}
         }).start();
         return Discordbot;
+    }
+
+    public SlashCommandData slashCommandDataMaker(SlashCommandHandler slashCommandHandler){
+        SlashCommandData sl = Commands.slash(slashCommandHandler.name(), (!(slashCommandHandler.description() == null && slashCommandHandler.description().isEmpty() && slashCommandHandler.description().isBlank()) ? slashCommandHandler.description() : "N/A"));
+        CommandData commandData = slashCommandHandler.commandData();
+        if(commandData != null) {
+            for (String st : commandData.getAsRaw().get("SubCommands"))
+                sl.addSubcommands(SubcommandData.fromData(DataObject.fromJson(st)));
+            for (String st : commandData.getAsRaw().get("SubCommandGroups"))
+                sl.addSubcommandGroups(SubcommandGroupData.fromData(DataObject.fromJson(st)));
+            for (String st : commandData.getAsRaw().get("Options"))
+                sl.addOptions(OptionData.fromData(DataObject.fromJson(st)));
+        }
+        return sl;
     }
 }

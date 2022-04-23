@@ -82,7 +82,6 @@ public class EventHandler extends ListenerAdapter {
 
         if(event.getMessage().getContentRaw().startsWith(Discordbot.prefix)) {
             String command = event.getMessage().getContentRaw().replaceFirst((Discordbot.prefix.equals("$") ? "\\$" : Discordbot.prefix), "");
-            System.out.println(command);
             String commandName = command.split(" ")[0];
             if (Discordbot.IgnoreCase)
                 commandName = commandName.toLowerCase();

@@ -56,7 +56,7 @@ public class Choice {
      * */
     public String getAsRaw(){
         return ("{" +
-                "\"name\": \"%s\"" +
+                "\"name\": \"%s\"," +
                 "\"value\": \"%s\"" +
                 "}").formatted(name, value);
     }

@@ -2,6 +2,7 @@ package cf.ystapi.jda.Objects;
 
 import cf.ystapi.jda.Enums.OptionType;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,7 +11,7 @@ public class Option {
     String description = "N/A";
     OptionType optionType = OptionType.STRING;
     boolean required = false;
-    List<Choice> choices;
+    List<Choice> choices = new ArrayList<>();
 
     public Option(String name){
         this.name = name;
