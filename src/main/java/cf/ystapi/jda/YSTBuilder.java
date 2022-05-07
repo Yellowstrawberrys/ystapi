@@ -11,6 +11,7 @@ import cf.ystapi.jda.Runables.DiscordRunnable;
 import cf.ystapi.jda.Runables.SlashRunnable;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.Command;
 import net.dv8tion.jda.api.interactions.commands.build.*;
 import net.dv8tion.jda.api.utils.data.DataObject;
@@ -38,6 +39,7 @@ public class YSTBuilder {
     HashMap<String, SlashRunnable> slashRunnableCommands = new HashMap<>();
     List<String> helpCommands = new ArrayList<>();
     HelpHandler helpHandler = new DefaultHelpHandler();
+    BeforeCommandHandler beforeCommandHandler = new BeforeCommandHandler() {};
     boolean IgnoreCase = false;
     boolean SlashCommandMode = false;
     boolean useFastSlashCommandUpsert = false;
@@ -246,6 +248,18 @@ public class YSTBuilder {
     }
 
     /**
+     * Setting BeforeCommandHandler Command Handler to your bot!
+     *
+     * @version Beta 0.0.2.3
+     * @return YSTBuilder
+     * @since Beta 0.0.2.3
+     * **/
+    public YSTBuilder setBeforeCommandHandler(BeforeCommandHandler beforeCommandHandler){
+        this.beforeCommandHandler = beforeCommandHandler;
+        return this;
+    }
+
+    /**
      * Set Test Guild for SlashCommands
      *
      * @param guildId
@@ -281,7 +295,7 @@ public class YSTBuilder {
         if(Logger.getLoggerByName("System") == null)
             new LoggingBuilder().build("System");
         Logger.getLoggerByName("System").info("Starting to load JDA Commands");
-        DiscordBot Discordbot = new DiscordBot(jda, commands, RunnableCommands, buttons, slashCommands, slashRunnableCommands, helpHandler, helpCommands, prefix, OwnerID, IgnoreCase);
+        DiscordBot Discordbot = new DiscordBot(jda, commands, RunnableCommands, buttons, slashCommands, slashRunnableCommands, helpHandler, beforeCommandHandler, helpCommands, prefix, OwnerID, IgnoreCase);
         EventHandler eventHandler = new EventHandler(Discordbot);
         jda.addEventListener(eventHandler);
         new Thread(() -> {

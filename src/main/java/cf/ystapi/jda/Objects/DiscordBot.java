@@ -1,10 +1,7 @@
 package cf.ystapi.jda.Objects;
 
-import cf.ystapi.jda.Handlers.SlashCommandHandler;
+import cf.ystapi.jda.Handlers.*;
 import cf.ystapi.jda.Runables.DiscordRunnable;
-import cf.ystapi.jda.Handlers.ButtonHandler;
-import cf.ystapi.jda.Handlers.CommandHandler;
-import cf.ystapi.jda.Handlers.HelpHandler;
 import cf.ystapi.jda.Runables.SlashRunnable;
 import net.dv8tion.jda.api.JDA;
 
@@ -28,6 +25,7 @@ public class DiscordBot {
 
     public List<String> helpCommands;
     public HelpHandler helpHandler;
+    public BeforeCommandHandler beforeCommandHandler;
 
     public String Owner;
     public String prefix;
@@ -35,7 +33,7 @@ public class DiscordBot {
     public boolean IgnoreCase;
     public boolean isSlashMode;
 
-    public DiscordBot(JDA jda, HashMap<String, CommandHandler> commands, HashMap<String, DiscordRunnable> RunnableCommands, HashMap<String, ButtonHandler> Buttons, HashMap<String, SlashCommandHandler> slashCommands, HashMap<String, SlashRunnable> slashRunnableCommands, HelpHandler helpHandler, List<String> helpCommands, String prefix, String OwnerID, boolean IgnoreCase){
+    public DiscordBot(JDA jda, HashMap<String, CommandHandler> commands, HashMap<String, DiscordRunnable> RunnableCommands, HashMap<String, ButtonHandler> Buttons, HashMap<String, SlashCommandHandler> slashCommands, HashMap<String, SlashRunnable> slashRunnableCommands, HelpHandler helpHandler, BeforeCommandHandler beforeCommandHandler, List<String> helpCommands, String prefix, String OwnerID, boolean IgnoreCase){
         this.jda = jda;
         this.commands = commands;
         this.RunnableCommands = RunnableCommands;
@@ -48,6 +46,7 @@ public class DiscordBot {
         this.IgnoreCase = IgnoreCase;
         this.helpCommands = helpCommands;
         this.helpHandler = helpHandler;
+        this.beforeCommandHandler = beforeCommandHandler;
         Thread t = new Thread("LowerCase"){
             @Override
             public void run() {

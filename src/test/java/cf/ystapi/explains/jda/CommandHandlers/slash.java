@@ -4,8 +4,6 @@ import cf.ystapi.jda.Enums.OptionType;
 import cf.ystapi.jda.Handlers.SlashCommandHandler;
 import cf.ystapi.jda.Objects.CommandData;
 import cf.ystapi.jda.Objects.Option;
-import cf.ystapi.jda.Objects.SubCommand;
-import cf.ystapi.jda.Objects.SubCommandGroup;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 

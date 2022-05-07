@@ -3,7 +3,7 @@
   "component": {
     "group": "cf.ystapi",
     "module": "ystapi",
-    "version": "BETA-0.0.2.2",
+    "version": "BETA-0.0.2.3",
     "attributes": {
       "org.gradle.status": "release"
     }
@@ -19,19 +19,19 @@
       "attributes": {
         "org.gradle.category": "library",
         "org.gradle.dependency.bundling": "external",
-        "org.gradle.jvm.version": 17,
+        "org.gradle.jvm.version": 16,
         "org.gradle.libraryelements": "jar",
         "org.gradle.usage": "java-api"
       },
       "files": [
         {
-          "name": "ystapi-BETA-0.0.2.2.jar",
-          "url": "ystapi-BETA-0.0.2.2.jar",
-          "size": 89232,
-          "sha512": "64829586f6fb7ec99e76d8bc7fb123161053d9a7968ff3ab6518a30a55683e20e5874af4f0288c73e4c91ddb416bd1640c33f34ca56aa7cd733725c6787f8394",
-          "sha256": "41ee0d0d5071c55e36922658b40f8c9d04973c4c3fe7ef3381bea4b04fc45896",
-          "sha1": "cda3954b4b9b1bbe04bf7b76beed7e9a10169584",
-          "md5": "9367ebc1ad5000e46de128fae14f5f35"
+          "name": "ystapi-BETA-0.0.2.3.jar",
+          "url": "ystapi-BETA-0.0.2.3.jar",
+          "size": 90493,
+          "sha512": "39341439a4a95ccc5ada3f63e044430b3d37270e91ac6a34e95e42002f7b49e6185d5cef6fb0bed1c89221d2997cc205dcf6ddd626a1673045423e45df41fca3",
+          "sha256": "ec235ce66335a20379614095ce66d0d4706ae8a865c4cd2fbe14383b07cd47ea",
+          "sha1": "341d8196d84fac57fa9bb77a3a838efcb3794b9c",
+          "md5": "3d307c9e373a5fee51744704c987cea7"
         }
       ]
     },
@@ -40,7 +40,7 @@
       "attributes": {
         "org.gradle.category": "library",
         "org.gradle.dependency.bundling": "external",
-        "org.gradle.jvm.version": 17,
+        "org.gradle.jvm.version": 16,
         "org.gradle.libraryelements": "jar",
         "org.gradle.usage": "java-runtime"
       },
@@ -62,13 +62,13 @@
       ],
       "files": [
         {
-          "name": "ystapi-BETA-0.0.2.2.jar",
-          "url": "ystapi-BETA-0.0.2.2.jar",
-          "size": 89232,
-          "sha512": "64829586f6fb7ec99e76d8bc7fb123161053d9a7968ff3ab6518a30a55683e20e5874af4f0288c73e4c91ddb416bd1640c33f34ca56aa7cd733725c6787f8394",
-          "sha256": "41ee0d0d5071c55e36922658b40f8c9d04973c4c3fe7ef3381bea4b04fc45896",
-          "sha1": "cda3954b4b9b1bbe04bf7b76beed7e9a10169584",
-          "md5": "9367ebc1ad5000e46de128fae14f5f35"
+          "name": "ystapi-BETA-0.0.2.3.jar",
+          "url": "ystapi-BETA-0.0.2.3.jar",
+          "size": 90493,
+          "sha512": "39341439a4a95ccc5ada3f63e044430b3d37270e91ac6a34e95e42002f7b49e6185d5cef6fb0bed1c89221d2997cc205dcf6ddd626a1673045423e45df41fca3",
+          "sha256": "ec235ce66335a20379614095ce66d0d4706ae8a865c4cd2fbe14383b07cd47ea",
+          "sha1": "341d8196d84fac57fa9bb77a3a838efcb3794b9c",
+          "md5": "3d307c9e373a5fee51744704c987cea7"
         }
       ]
     },
@@ -82,13 +82,13 @@
       },
       "files": [
         {
-          "name": "ystapi-BETA-0.0.2.2-sources.jar",
-          "url": "ystapi-BETA-0.0.2.2-sources.jar",
-          "size": 64751,
-          "sha512": "0c76938acc43678b7eaf4481eaa8cc081f8e98ffa3a71450a8f77150b7eb17a44e27222b716701f217804d0bbcca1615ea33a2a60b96089496272f7f4c1bac1b",
-          "sha256": "b96280c68b8396c76f68fe2a9096241539eaf6afeecb878256bb0b451bfae933",
-          "sha1": "4d7e96bcb8d6f232a685ae7a2d5b76527dd6c7f7",
-          "md5": "f78da7e6409765cf4d1e1b1849ab9c36"
+          "name": "ystapi-BETA-0.0.2.3-sources.jar",
+          "url": "ystapi-BETA-0.0.2.3-sources.jar",
+          "size": 65298,
+          "sha512": "c23f99518b189c608c1fa526bdd08d28cc7cfd17305263b4a40adcf936ed1e79f6f1b1a507020a12888d084a69a26663011fb5a86c54e059a0caa5ced3894179",
+          "sha256": "86a322aa15c7fd54ffd176ca57a73b26ff998d8794c2adf3a84137c211cb1e43",
+          "sha1": "affebeb1aba23495abad0bcbdb72f4110753c8ce",
+          "md5": "3b22c6134caef6910dcec97c97aea044"
         }
       ]
     },
@@ -102,13 +102,13 @@
       },
       "files": [
         {
-          "name": "ystapi-BETA-0.0.2.2-javadoc.jar",
-          "url": "ystapi-BETA-0.0.2.2-javadoc.jar",
-          "size": 245255,
-          "sha512": "0f3f6f157eb40ffc46a205d77089670add6299f3add1d0d6062d58be3c3a2adbc4c8a3f1fcf62c892269731f00135fada016022a8979dd47e8270dee9445826f",
-          "sha256": "a59336208669b9ea681afe3d01d467f7015ec04edd734c570b944df6899c9783",
-          "sha1": "9093cf2d9ff4f99adc8390f9d7a50ae0f02c4675",
-          "md5": "a0d2b9b397a4ac87ad431b16fa9b8bdf"
+          "name": "ystapi-BETA-0.0.2.3-javadoc.jar",
+          "url": "ystapi-BETA-0.0.2.3-javadoc.jar",
+          "size": 241952,
+          "sha512": "913bb501fad778de8e3a524d36fe5014a24b2a9b4d875dc9404cf509706f1767c2bd03837a15025c0ec7ab0d44a8c24734024adec7bb72df63cfe3ad104aeb49",
+          "sha256": "531a1e2dc376e9d3b2e7808ffb36dfffc277477997fbe2d3e459a11a2c3e26bd",
+          "sha1": "2c6f1ca02508c2a96a4c009c09af1052a6412ec9",
+          "md5": "53349638e19d58e2fe3ae8c80d246198"
         }
       ]
     }

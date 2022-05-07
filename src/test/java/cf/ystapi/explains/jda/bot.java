@@ -22,7 +22,8 @@ public class bot {
         builder.addCommand(new first()).addCommand(new second()).addCommand("run", (event, args1, channel) -> channel.sendMessage("Test Fin").queue())
                 .setPrefix("$").setOwner("719932404877230140").addCommand("audio", (event, args1, channel) -> event.getJDA().getDirectAudioController().connect(event.getMember().getVoiceState().getChannel()))
                 .addSlashCommand(new slash(), new slash2())
-                .setHelpCommands("d").addSlashCommand(new slash());
+                .setHelpCommands("d").addSlashCommand(new slash())
+                .setBeforeCommandHandler(new something());
 //        builder.setTestGuild("937349241112756224");
         builder.addButton(new Test());
 //        builder.useFastSlashCommandUpsert(true);
