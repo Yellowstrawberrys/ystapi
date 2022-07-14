@@ -10,14 +10,18 @@ import jdk.jshell.SnippetEvent;
 import jdk.jshell.execution.LocalExecutionControlProvider;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.entities.Channel;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.ReadyEvent;
+import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.interactions.ModalInteraction;
+import net.dv8tion.jda.api.interactions.components.Modal;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import org.jetbrains.annotations.NotNull;
 
@@ -86,7 +90,7 @@ public class EventHandler extends ListenerAdapter {
             if (Discordbot.IgnoreCase)
                 commandName = commandName.toLowerCase();
             try {
-                if(Discordbot.beforeCommandHandler.isCommandCanceled(event)) {
+                if(!Discordbot.beforeCommandHandler.isCommandCanceled(event)) {
                     if (Discordbot.commands.containsKey(commandName)) {
                         callCommand(event, command, commandName);
                     }
@@ -258,7 +262,7 @@ public class EventHandler extends ListenerAdapter {
      * **/
     @Override
     public void onSlashCommandInteraction(@NotNull SlashCommandInteractionEvent event) {
-        if(Discordbot.beforeCommandHandler.isSlashCommandCanceled(event)) {
+        if(!Discordbot.beforeCommandHandler.isSlashCommandCanceled(event)) {
             String command = event.getName();
             if (Discordbot.IgnoreCase)
                 command = command.toLowerCase();
@@ -340,6 +344,36 @@ public class EventHandler extends ListenerAdapter {
                 Class<?> cls = new YSTClassLoader().loadClass(Discordbot.Buttons.get(event.getButton().getId()).getClass().getName());
                 Object clazz = cls.getDeclaredConstructor().newInstance();
                 cls.getMethod("onCalled", ButtonInteractionEvent.class, User.class, Button.class, MessageChannel.class).invoke(clazz, event, event.getUser(), event.getButton(), event.getChannel());
+            }catch (Exception e1){
+                err(e.getClass().getName(), e.getMessage());
+            }
+        }catch (Exception e){err(e.getClass().getName(), e.getMessage());}
+    }
+
+    /**
+     * You don't need to come here!
+     * <p>
+     * If you want know about this then,
+     * <p>
+     * this code is handling buttons
+     *
+     * @version Beta 0.0.2.6
+     * @since Beta 0.0.2.6
+     * **/
+    @Override
+    public void onModalInteraction(@NotNull ModalInteractionEvent event) {
+        try {
+            if (Discordbot.Modals.containsKey(event.getModalId())) {
+                Class<?> cls = new YSTClassLoader().loadClass(Discordbot.Modals.get(event.getModalId()).getClass().getName());
+                Object clazz = cls.getDeclaredConstructor().newInstance();
+                cls.getMethod("onCalled", ModalInteractionEvent.class, User.class, List.class, Channel.class).invoke(clazz, event, event.getUser(), event.getValues(), event.getChannel());
+            }
+        } catch (InvocationTargetException e){
+            classLoader = new YSTClassLoader();
+            try {
+                Class<?> cls = new YSTClassLoader().loadClass(Discordbot.Modals.get(event.getModalId()).getClass().getName());
+                Object clazz = cls.getDeclaredConstructor().newInstance();
+                cls.getMethod("onCalled", ModalInteractionEvent.class, User.class, List.class, Channel.class).invoke(clazz, event, event.getUser(), event.getValues(), event.getChannel());
             }catch (Exception e1){
                 err(e.getClass().getName(), e.getMessage());
             }

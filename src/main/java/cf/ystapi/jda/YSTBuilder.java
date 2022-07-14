@@ -34,6 +34,7 @@ import java.util.List;
 public class YSTBuilder {
     HashMap<String, CommandHandler> commands = new HashMap<>();
     HashMap<String, ButtonHandler> buttons = new HashMap<>();
+    HashMap<String, ModalHandler> modals = new HashMap<>();
     HashMap<String, DiscordRunnable> RunnableCommands = new HashMap<>();
     HashMap<String, SlashCommandHandler> slashCommands = new HashMap<>();
     HashMap<String, SlashRunnable> slashRunnableCommands = new HashMap<>();
@@ -168,15 +169,42 @@ public class YSTBuilder {
     }
 
     /**
-     * Adding Button to your bot(Button Handler)!
+     * Adding Button to your bot(Button Handler) | deprecated!
      *
      * @version Beta 0.0.0.8
      * @return YSTBuilder
      * @since Beta 0.0.0.8
+     * @deprecated
      * **/
-    public YSTBuilder addButton(ButtonHandler... buttonHandlers) {
+    @Deprecated
+    public YSTBuilder addButton(ButtonHandler... buttonHandlers){
+        addButtons(buttonHandlers);
+        return this;
+    }
+
+    /**
+     * Adding Button to your bot(Button Handler)!
+     *
+     * @version Beta 0.0.2.6
+     * @return YSTBuilder
+     * @since Beta 0.0.2.6
+     * **/
+    public YSTBuilder addButtons(ButtonHandler... buttonHandlers) {
         for(ButtonHandler buttonHandler : buttonHandlers)
             buttons.put(buttonHandler.id(), buttonHandler);
+        return this;
+    }
+
+    /**
+     * Adding Button to your bot(Button Handler)!
+     *
+     * @version Beta 0.0.2.6
+     * @return YSTBuilder
+     * @since Beta 0.0.2.6
+     * **/
+    public YSTBuilder addModals(ModalHandler... modalHandlers) {
+        for(ModalHandler modalHandler : modalHandlers)
+            modals.put(modalHandler.id(), modalHandler);
         return this;
     }
 
@@ -274,7 +302,7 @@ public class YSTBuilder {
     /**
      * Set useFastSlashCommandUpsert<br/>
      *<br/>
-     * <strong>I DON'T RECOMMEND TO USE THIS OPTION</strong><br/>
+     * <strong>WE DON'T RECOMMEND TO USE THIS OPTION</strong><br/>
      * <strong>This might cause more resources/loading in startup.</strong>
      * @param isUsing
      * @return YSTBuilder
@@ -287,7 +315,7 @@ public class YSTBuilder {
     /**
      * To start your bot, you need this!
      *
-     * @version Beta 0.0.2.2
+     * @version Beta 0.0.2.6
      * @return DiscordBot
      * @since Beta 0.0.0.3
      * **/
@@ -295,7 +323,7 @@ public class YSTBuilder {
         if(Logger.getLoggerByName("System") == null)
             new LoggingBuilder().build("System");
         Logger.getLoggerByName("System").info("Starting to load JDA Commands");
-        DiscordBot Discordbot = new DiscordBot(jda, commands, RunnableCommands, buttons, slashCommands, slashRunnableCommands, helpHandler, beforeCommandHandler, helpCommands, prefix, OwnerID, IgnoreCase);
+        DiscordBot Discordbot = new DiscordBot(jda, commands, RunnableCommands, buttons, modals, slashCommands, slashRunnableCommands, helpHandler, beforeCommandHandler, helpCommands, prefix, OwnerID, IgnoreCase);
         EventHandler eventHandler = new EventHandler(Discordbot);
         jda.addEventListener(eventHandler);
         new Thread(() -> {
@@ -311,10 +339,8 @@ public class YSTBuilder {
                         }
                     }
                 } else {
-                    List<SlashCommandData> list = new ArrayList<>();
                     for (SlashCommandHandler slashCommandHandler : slashCommands.values())
-                        list.add(slashCommandDataMaker(slashCommandHandler));
-                    jda.awaitReady().updateCommands().addCommands(list).queue();
+                        jda.awaitReady().upsertCommand(slashCommandDataMaker(slashCommandHandler)).queue();
                 }
                 for (String command : slashRunnableCommands.keySet())
                     jda.awaitReady().upsertCommand(command, "N/A").queue();

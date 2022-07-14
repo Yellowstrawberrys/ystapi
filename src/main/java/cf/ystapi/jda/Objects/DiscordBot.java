@@ -20,6 +20,7 @@ public class DiscordBot {
     public HashMap<String, String> Aliases;
     public HashMap<String, DiscordRunnable> RunnableCommands;
     public HashMap<String, ButtonHandler> Buttons;
+    public HashMap<String, ModalHandler> Modals;
     public HashMap<String, SlashCommandHandler> slashCommands;
     public HashMap<String, SlashRunnable> slashRunnableCommands;
 
@@ -33,7 +34,7 @@ public class DiscordBot {
     public boolean IgnoreCase;
     public boolean isSlashMode;
 
-    public DiscordBot(JDA jda, HashMap<String, CommandHandler> commands, HashMap<String, DiscordRunnable> RunnableCommands, HashMap<String, ButtonHandler> Buttons, HashMap<String, SlashCommandHandler> slashCommands, HashMap<String, SlashRunnable> slashRunnableCommands, HelpHandler helpHandler, BeforeCommandHandler beforeCommandHandler, List<String> helpCommands, String prefix, String OwnerID, boolean IgnoreCase){
+    public DiscordBot(JDA jda, HashMap<String, CommandHandler> commands, HashMap<String, DiscordRunnable> RunnableCommands, HashMap<String, ButtonHandler> Buttons, HashMap<String, ModalHandler> Modals, HashMap<String, SlashCommandHandler> slashCommands, HashMap<String, SlashRunnable> slashRunnableCommands, HelpHandler helpHandler, BeforeCommandHandler beforeCommandHandler, List<String> helpCommands, String prefix, String OwnerID, boolean IgnoreCase){
         this.jda = jda;
         this.commands = commands;
         this.RunnableCommands = RunnableCommands;
@@ -43,6 +44,7 @@ public class DiscordBot {
         this.prefix = prefix;
         this.Owner = OwnerID;
         this.Buttons = Buttons;
+        this.Modals = Modals;
         this.IgnoreCase = IgnoreCase;
         this.helpCommands = helpCommands;
         this.helpHandler = helpHandler;

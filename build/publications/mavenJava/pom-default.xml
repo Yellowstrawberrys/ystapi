@@ -9,7 +9,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>cf.ystapi</groupId>
   <artifactId>ystapi</artifactId>
-  <version>BETA-0.0.2.3</version>
+  <version>BETA-0.0.2.6</version>
   <name>YST API</name>
   <description>Logging and JDA Handler API</description>
   <url>https://api.yellowstrawberry.cf/</url>
@@ -41,7 +41,7 @@
     <dependency>
       <groupId>net.dv8tion</groupId>
       <artifactId>JDA</artifactId>
-      <version>5.0.0-alpha.10</version>
+      <version>5.0.0-alpha.13</version>
       <scope>runtime</scope>
     </dependency>
   </dependencies>
